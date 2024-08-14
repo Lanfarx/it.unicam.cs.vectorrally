@@ -1,6 +1,9 @@
 package it.unicam.cs.vectorrally.app.movements;
 
 public class Vector implements iVector{
+    public Vector(int i, int i1) {
+    }
+
     /**
      * Gets the acceleration value x of the direction vector.
      *
