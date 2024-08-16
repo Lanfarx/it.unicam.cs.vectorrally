@@ -33,4 +33,12 @@ public interface iPlayer {
      * @return the current position
      */
     Position getPosition();
+
+    /**
+     * Sets the player position on the track
+     *
+     * @param position the position the player will be located
+     * @throws NullPointerException if the position is null
+     */
+    void setPosition(Position position);
 }

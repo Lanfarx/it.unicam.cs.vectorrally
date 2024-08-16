@@ -36,7 +36,6 @@ public interface iVector {
      * Sets the direction value of the direction vector.
      *
      * @return the direction of the vector
-     * @throws IllegalStateException if the direction is not accepted.
      */
 
     MoveDirection getDirection();

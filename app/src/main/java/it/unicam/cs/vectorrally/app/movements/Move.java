@@ -1,23 +1,33 @@
 package it.unicam.cs.vectorrally.app.movements;
 
 public class Move implements iMove{
-    /**
-     * Gets the acceleration
-     *
-     * @return the acceleration vector
-     */
-    @Override
-    public Vector acceleration() {
-        return null;
-    }
+
+    private final Vector acceleration;
+    private final Position position;
 
     /**
-     * Gets the new position after the vector has been calculated
+     * Creates a move based on the given acceleration and position
      *
-     * @return the new position
+     * @param acceleration the given acceleration for the move
+     * @param position the given position
      */
+    public Move(Vector acceleration, Position position) {
+        this.acceleration = acceleration;
+        this.position = position;
+    }
+
+    @Override
+    public Vector getAcceleration() {
+        return this.acceleration;
+    }
+
+    @Override
+    public Position getStartingPosition() {
+        return this.position;
+    }
+
     @Override
     public Position getNewPosition() {
-        return null;
+       return new Position(this.position.getX() + this.acceleration.getAx(), this.position.getY() + this.acceleration.getAy());
     }
 }
