@@ -12,3 +12,5 @@ plugins {
 
 rootProject.name = "it.unicam.cs.vectorrally"
 include("app")
+include("api")
+
