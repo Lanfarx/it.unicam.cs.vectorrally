@@ -1,6 +1,10 @@
 package it.unicam.cs.vectorrally.api.controller;
 
+import it.unicam.cs.vectorrally.api.movements.Move;
 import it.unicam.cs.vectorrally.api.players.Player;
+import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
+
+import java.util.List;
 
 public interface iGameController {
 
@@ -9,7 +13,8 @@ public interface iGameController {
      *
      * @throws Exception if something goes wrong
      */
-    void startGame() throws Exception;
+
+    void startGame(List<Player> players,RaceTrack raceTrack) throws Exception;
 
     /**
      * Manage a turn for the given player

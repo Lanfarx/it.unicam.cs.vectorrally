@@ -20,14 +20,7 @@ public interface iGameConfigurator {
      *
      * @param raceTrack where the playerCars will race against each-other
      * @return the list of the configured players for the game
-     */
-    List<Player> configPlayers(RaceTrack raceTrack);
+     */;
 
-    /**
-     * Configures the game with the given players and racetrack
-     *
-     * @param players the configured players for the game
-     * @param raceTrack where the playerCars will race against each-other
-     */
-    void configGame(List<Player> players, RaceTrack raceTrack);
+    List<Player> configPlayers(RaceTrack raceTrack) throws IOException;
 }

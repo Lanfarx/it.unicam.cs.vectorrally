@@ -5,7 +5,6 @@ import it.unicam.cs.vectorrally.api.movements.Move;
 import it.unicam.cs.vectorrally.api.players.Player;
 import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface iUIRaceController extends iUIController {
@@ -19,22 +18,20 @@ public interface iUIRaceController extends iUIController {
     void displayTrack(RaceTrack raceTrack, List<Player> players);
 
     /**
-     * Choose the track files
+     * Chooses the track files
      *
-     * @param trackNames the track files names
      * @return the chosen track file
      */
 
-    String chooseTrack(List<String> trackNames);
+    int chooseTrack();
 
     /**
      * Chooses the number of Bot players in the game
      *
-     * @param filepath the filepath of bot configuration file
      * @return the number of Bot players
      */
 
-    int chooseBotPlayers(String filepath) throws IOException;
+    int chooseBots();
 
     /**
      * Chooses the number of Interactive players in the game
@@ -58,5 +55,26 @@ public interface iUIRaceController extends iUIController {
      * @param moves the valid moves
      */
     Move chooseNextMove(List<Move> moves);
+
+    /**
+     * Displays the turn of the player
+     *
+     * @param player the player whose turn is
+     */
+    void displayPlayerTurn(Player player);
+
+    /**
+     * Displays the elimination of the given player
+     *
+     * @param player the player who is eliminated
+     */
+    void displayPlayerElimination(Player player);
+
+    /**
+     * Displays the victory of the given player
+     *
+     * @param player the player who has won
+     */
+    void displayVictory(Player player);
 
 }

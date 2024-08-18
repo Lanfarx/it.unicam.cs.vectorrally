@@ -1,14 +1,14 @@
 package it.unicam.cs.vectorrally.api.cars;
 
 public enum Color {
-    RED("\u001B[31m"),
-    BLUE("\u001B[34m"),
-    GREEN("\u001B[32m"),
-    YELLOW("\u001B[33m"),
-    ORANGE("\u001B[38;5;208m"),
-    MAGENTA("\u001B[35m"),
-    PINK("\u001B[38;5;205m"),
-    BROWN("\u001B[[38;5;94m"),;
+    RED("\033[31m"),
+    BLUE("\033[34m"),
+    GREEN("\033[32m"),
+    YELLOW("\033[33m"),
+    ORANGE("\033[38;5;208m"),
+    MAGENTA("\033[35m"),
+    PINK("\033[38;5;205m"),
+    BROWN("\033[[38;5;94m");
 
     private final String color;
 

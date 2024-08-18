@@ -1,4 +1,4 @@
-package it.unicam.cs.vectorrally.api.controller;
+package it.unicam.cs.vectorrally.api.controller.file;
 
 import it.unicam.cs.vectorrally.api.movements.Position;
 import it.unicam.cs.vectorrally.api.tracks.RaceTrack;

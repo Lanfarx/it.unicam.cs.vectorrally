@@ -7,5 +7,5 @@ public interface iGameEngine {
      *
      * @throws Exception if something goes wrong
      */
-    void startApp() throws Exception;
+    void start() throws Exception;
 }

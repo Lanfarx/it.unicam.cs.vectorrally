@@ -18,25 +18,25 @@ repositories {
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
+    implementation(project(":api"))
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     // This dependency is used by the application.
     implementation(libs.guava)
 
-    implementation(project(":api"))
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
 application {
     // Define the main class for the application.
-    mainClass = "it.unicam.cs.vectorrally.app.GameEngine"
+    mainClass = "it.unicam.cs.vectorrally.app.App"
 }
 
 tasks.named<Test>("test") {
