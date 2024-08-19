@@ -7,6 +7,7 @@ public class App {
     public static void main(String[] args) {
         try {
             UIRaceController uiController = new UIRaceController();
+
             GameEngine gameEngine = new GameEngine(uiController);
             gameEngine.start();
         } catch (Exception e) {

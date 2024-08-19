@@ -10,7 +10,7 @@ import java.util.List;
 public interface iUIRaceController extends iUIController {
 
     /**
-     * Displays the actual track
+     * Displays the actual track progresses
      *
      * @param raceTrack the racetrack to be displayed
      * @param players the list of all the players
@@ -18,17 +18,17 @@ public interface iUIRaceController extends iUIController {
     void displayTrack(RaceTrack raceTrack, List<Player> players);
 
     /**
-     * Chooses the track files
+     * Chooses the track file
      *
-     * @return the chosen track file
+     * @return the number of the track file
      */
 
     int chooseTrack();
 
     /**
-     * Chooses the number of Bot players in the game
+     * Chooses the bot file
      *
-     * @return the number of Bot players
+     * @return the number of the bot file
      */
 
     int chooseBots();
@@ -52,7 +52,7 @@ public interface iUIRaceController extends iUIController {
     /**
      * Makes a player choose his next move
      *
-     * @param moves the valid moves
+     * @param moves the available moves
      */
     Move chooseNextMove(List<Move> moves);
 

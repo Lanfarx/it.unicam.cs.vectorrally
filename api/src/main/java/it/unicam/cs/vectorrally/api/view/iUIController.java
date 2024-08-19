@@ -2,7 +2,8 @@ package it.unicam.cs.vectorrally.api.view;
 
 public interface iUIController {
 
-    /** Displays a given message
+    /**
+     * Displays a given message
      *
      * @param message the given message
      */
@@ -10,11 +11,13 @@ public interface iUIController {
 
     /**
      * Displays a configured start message
+     *
      */
     void displayStart();
 
     /**
      * Displays a configured end message
+     *
      */
     void displayEnd();
 

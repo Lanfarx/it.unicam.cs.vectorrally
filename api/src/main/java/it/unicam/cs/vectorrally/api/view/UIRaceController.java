@@ -39,8 +39,7 @@ public class UIRaceController implements iUIRaceController {
         for (Player player : players) {
             if (player.getPosition().equals(position)) {
                 String colorCode = player.getPlayerCarColor().getColor();
-                String playerSymbol = colorCode + '^' + "\033[0m";
-                iUtils.printText(playerSymbol);
+                iUtils.printTextColored("^", colorCode);
                 return true;
             }
         }
@@ -88,33 +87,35 @@ public class UIRaceController implements iUIRaceController {
         return intPlayers;
     }
 
-    @Override
-    public Color chooseColor(List<Color> colors) {
-        iUtils.printlnText("Choose a color for your car: ");
-        //TODO
-        return null;
-    }
-
     public void displayPlayerTurn(Player player){
         String playerSymbolColorCode = player.getPlayerCarColor().getColor();
-        iUtils.printlnText("Player " + playerSymbolColorCode + "'s turn" + "\033[0m");
+        iUtils.printlnTextColored("Player's turn", player.getPlayerCarColor().getColor());
+    }
+
+    public void displayPlayerMove(Player player, Move move){
+        iUtils.printlnTextColored("Player's move is" + player.getPlayerAcceleration().toString(), player.getPlayerCarColor().getColor());
     }
 
     @Override
     public void displayPlayerElimination(Player player) {
-        String playerSymbolColorCode = player.getPlayerCarColor().getColor();
-        iUtils.printlnText("Player " + playerSymbolColorCode + "' has been eliminated" + "\033[0m");
+        iUtils.printlnTextColored("Player has been eliminated", player.getPlayerCarColor().getColor());
     }
 
     @Override
     public void displayVictory(Player player) {
-        String playerSymbolColorCode = player.getPlayerCarColor().getColor();
-        iUtils.printlnText("Player " + playerSymbolColorCode + " has WON!!!" + "\033[0m");
+        iUtils.printlnTextColored("PLAYER HAS WON", player.getPlayerCarColor().getColor());
     }
 
     @Override
     public Move chooseNextMove(List<Move> moves) {
         iUtils.printlnText("Choose your next move: ");
+        //TODO
+        return null;
+    }
+
+    @Override
+    public Color chooseColor(List<Color> colors) {
+        iUtils.printlnText("Choose a color for your car: ");
         //TODO
         return null;
     }

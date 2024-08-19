@@ -21,10 +21,10 @@ public interface iTrack {
     int getWidth();
 
     /**
-     * Gets the positions of the corresponding symbols in the track
+     * Gets the positions of the corresponding symbol in the track
      *
      * @param symbol the symbol
-     * @return the positions of the corresponding symbols in the track
+     * @return the positions of the corresponding symbol in the track
      */
     List<Position> getSymbolsPosition(TrackSymbol symbol);
 

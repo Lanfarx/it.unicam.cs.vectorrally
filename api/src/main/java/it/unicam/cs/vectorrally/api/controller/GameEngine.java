@@ -5,7 +5,6 @@ import it.unicam.cs.vectorrally.api.players.Player;
 import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
 import it.unicam.cs.vectorrally.api.view.UIRaceController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameEngine implements iGameEngine{
@@ -27,14 +26,10 @@ public class GameEngine implements iGameEngine{
 
     @Override
     public void start() throws Exception {
-        GameController gameController = new GameController(controller);
+        GameController gameController = new GameController(controller, new MoveCalculator());
         gameController.startGame(this.configurator.configPlayers(this.raceTrack),this.configurator.configTrack());
         gameController.run();
 
-    }
-
-    public void endGame(){
-        controller.displayEnd();
     }
 
 }

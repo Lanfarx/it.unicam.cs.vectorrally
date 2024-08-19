@@ -27,7 +27,7 @@ public interface iUtils {
      * @param text the printed text
      */
     static void printTextColored(String text, String color){
-        printText(color + text + "\u001B[0m");
+        printText(color + text + "\033[0m");
     }
 
     /**
@@ -35,8 +35,8 @@ public interface iUtils {
      *
      * @param text the printed text
      */
-    static void printlnTextColoredColored(String text, String color){
-        printlnText(color + text + "\u001B[0m");
+    static void printlnTextColored(String text, String color){
+        printlnText(color + text + "\033[0m");
     }
 
 
