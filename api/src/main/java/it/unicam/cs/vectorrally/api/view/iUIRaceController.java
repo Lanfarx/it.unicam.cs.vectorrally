@@ -1,3 +1,12 @@
+/*
+ * Copyright <2024> <Lorenzo Marcantognini>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package it.unicam.cs.vectorrally.api.view;
 
 import it.unicam.cs.vectorrally.api.cars.Color;
@@ -7,74 +16,85 @@ import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
 
 import java.util.List;
 
+/**
+ * The {@code iUIRaceController} interface extends {@code iUIController} and defines
+ * a contract for classes that manage the user interface for a racing game. It includes
+ * methods for displaying the game track, choosing game settings, and handling player interactions.
+ */
 public interface iUIRaceController extends iUIController {
 
     /**
-     * Displays the actual track progresses
+     * Displays the current state of the race track along with the players' positions.
      *
-     * @param raceTrack the racetrack to be displayed
-     * @param players the list of all the players
+     * @param raceTrack A {@code RaceTrack} representing the track to be displayed.
+     * @param players A {@code List<Player>} containing all the players in the game.
      */
     void displayTrack(RaceTrack raceTrack, List<Player> players);
 
     /**
-     * Chooses the track file
+     * Prompts the user to choose a track file from 3 and returns the selected track file number.
      *
-     * @return the number of the track file
+     * @return An {@code int} representing the number of the selected track file.
      */
-
     int chooseTrack();
 
     /**
-     * Chooses the bot file
+     * Prompts the user to choose a bot file from 3 and returns the selected bot file number.
      *
-     * @return the number of the bot file
+     * @return An {@code int} representing the number of the selected bot file.
      */
-
     int chooseBots();
 
     /**
-     * Chooses the number of Interactive players in the game
+     * Prompts the user to specify the number of interactive players in the game.
      *
-     * @param numPlayers the number of Interactive players
-     * @return the number of Interactive players
+     * @param numPlayers An {@code int} representing the number of interactive players.
+     * @return An {@code int} representing the number of interactive players chosen.
      */
     int chooseNumPlayers(int numPlayers);
 
     /**
-     * Makes a player choose a car color.
+     * Prompts the user to choose a car color from the provided list of colors.
      *
-     * @param colors the list of colors
-     * @return the chosen color
+     * @param colors A {@code List<Color>} containing the available car colors.
+     * @return A {@code Color} representing the chosen car color.
      */
     Color chooseColor(List<Color> colors);
 
     /**
-     * Makes a player choose his next move
+     * Prompts the user to choose their next move from the available moves.
      *
-     * @param moves the available moves
+     * @param moves A {@code List<Move>} containing the available moves.
+     * @return A {@code Move} representing the chosen next move.
      */
     Move chooseNextMove(List<Move> moves);
 
     /**
-     * Displays the turn of the player
+     * Displays the turn information for the specified player.
      *
-     * @param player the player whose turn is
+     * @param player A {@code Player} whose turn is being displayed.
      */
     void displayPlayerTurn(Player player);
 
     /**
-     * Displays the elimination of the given player
+     * Displays the move made by a player.
      *
-     * @param player the player who is eliminated
+     * @param player The {@code Player} who made the move.
+     * @param move The {@code Move} that the player made.
+     */
+    void displayPlayerMove(Player player, Move move);
+
+    /**
+     * Displays a message indicating that the specified player has been eliminated.
+     *
+     * @param player A {@code Player} who has been eliminated from the game.
      */
     void displayPlayerElimination(Player player);
 
     /**
-     * Displays the victory of the given player
+     * Displays a message indicating that the specified player has won the game.
      *
-     * @param player the player who has won
+     * @param player A {@code Player} who has won the game.
      */
     void displayVictory(Player player);
-
 }

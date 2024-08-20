@@ -1,26 +1,47 @@
+/*
+ * Copyright <2024> <Lorenzo Marcantognini>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package it.unicam.cs.vectorrally.api.tracks;
 
+/**
+ * The {@code TrackSymbol} enum represents various symbols used in a racing track.
+ * Each symbol corresponds to a specific feature or element of the track.
+ * This enum implements the {@code iSymbol} interface to provide a method for retrieving the character representation of each symbol.
+ */
 public enum TrackSymbol implements iSymbol {
-    START('-'), END('_'), BORDER('|'), CIRCUIT('.');
+    START('-') /* Represents the starting point of the track. */,
+    END('_') /* Represents the ending point of the track. */,
+    BORDER('|') /* Represents the border or boundary of the track. */,
+    CIRCUIT('.') /* Represents the circuit or path of the track. */;
 
     private final char symbol;
 
+    /**
+     * Constructs a {@code TrackSymbol} with the specified character representation.
+     *
+     * @param symbol The character that represents the symbol in the track.
+     */
     TrackSymbol(char symbol) {
         this.symbol = symbol;
     }
 
     @Override
     public char getSymbol() {
-
         return symbol;
     }
 
     /**
-     * Gets the real purpose of the corresponding symbol
+     * Retrieves the {@code TrackSymbol} that corresponds to the given character.
      *
-     * @param symbol the character that may represent a symbol in the track
-     * @return the corresponding purpose of the symbol
-     * @throws IllegalArgumentException if the char doesn't represent any symbol in the track.
+     * @param symbol The character that may represent a symbol in the track.
+     * @return The {@code TrackSymbol} corresponding to the character.
+     * @throws IllegalArgumentException If the character does not represent any valid symbol in the track.
      */
     public static TrackSymbol realTrackSymbol(char symbol) {
         for (TrackSymbol trackSymbol : TrackSymbol.values()) {

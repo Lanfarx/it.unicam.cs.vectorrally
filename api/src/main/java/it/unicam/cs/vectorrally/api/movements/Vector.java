@@ -1,16 +1,30 @@
+/*
+ * Copyright <2024> <Lorenzo Marcantognini>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package it.unicam.cs.vectorrally.api.movements;
 
 import static java.lang.Integer.signum;
 
-public class Vector implements iVector{
+/**
+ * The {@code Vector} class implements the {@code iVector} interface and represents a two-dimensional vector
+ * with acceleration components {@code Ax} and {@code Ay}. This class provides methods to access and modify
+ * the vector's components.
+ */
+public class Vector implements iVector {
     private int Ax;
     private int Ay;
 
     /**
-     * Creates a vector having the given Ax and Ay.
-     *     *
-     * @param Ax the Ax value of the vector
-     * @param Ay the Ay value of the vector
+     * Constructs a {@code Vector} instance with the specified acceleration values for {@code Ax} and {@code Ay}.
+     *
+     * @param Ax the acceleration value along the x-axis
+     * @param Ay the acceleration value along the y-axis
      */
     public Vector(int Ax, int Ay) {
         this.Ax = Ax;

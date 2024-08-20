@@ -2,7 +2,7 @@ plugins {
     id("java")
 }
 
-group = "it.unicam.cs.mpmgc.cardgame"
+group = "it.unicam.cs.vectorrally"
 version = "unspecified"
 
 repositories {

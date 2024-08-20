@@ -1,19 +1,34 @@
+/*
+ * Copyright <2024> <Lorenzo Marcantognini>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package it.unicam.cs.vectorrally.api.movements;
 
+/**
+ * The {@code Position} class implements the {@code iPosition} interface and represents a point in a 2D space
+ * with {@code x} and {@code y} coordinates. This class provides methods to access and modify these coordinates.
+ */
 public class Position implements iPosition {
 
     private int x;
     private int y;
 
     /**
-     * Creates a position based on the values x and y
+     * Constructs a {@code Position} instance with the specified x and y coordinates.
      *
-     * @param x the x value
-     * @param y the y value
-     * @throws IllegalArgumentException if the x or y are not valid
+     * @param x the x-coordinate of the position
+     * @param y the y-coordinate of the position
+     * @throws IllegalArgumentException if either {@code x} or {@code y} is negative
      */
     public Position(int x, int y) {
-        if(x < 0 || y < 0) throw new IllegalArgumentException("Axes not valid");
+        if (x < 0 || y < 0) {
+            throw new IllegalArgumentException("Axes not valid");
+        }
         this.x = x;
         this.y = y;
     }

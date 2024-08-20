@@ -1,3 +1,12 @@
+/*
+ * Copyright <2024> <Lorenzo Marcantognini>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package it.unicam.cs.vectorrally.api.view;
 
 import it.unicam.cs.vectorrally.api.cars.Color;
@@ -9,9 +18,20 @@ import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * The {@code UIRaceController} class implements the {@code iUIRaceController} interface and provides
+ * functionality to interact with the user for a racing game. It handles the display of the game track,
+ * player interactions, and game configuration through a command-line interface.
+ * <p>
+ * This class uses a {@code Scanner} to read user inputs from the standard input stream.
+ * </p>
+ */
 public class UIRaceController implements iUIRaceController {
     private final Scanner scanner;
 
+    /**
+     * Constructs a {@code UIRaceController} instance and initializes the {@code Scanner} for user input.
+     */
     public UIRaceController() {
         this.scanner = new Scanner(System.in);
     }
@@ -35,7 +55,19 @@ public class UIRaceController implements iUIRaceController {
         }
     }
 
-    private boolean isPlayerAtPosition(Position position, List<Player> players){
+    /**
+     * Checks if any player is located at the specified position on the track and displays a marker.
+     * <p>
+     * This method iterates through the list of players to determine if any player's position matches the given position.
+     * If a player is found at the position, it prints a colored marker ('^') to indicate the player's presence and returns {@code true}.
+     * If no player is found at the position, it returns {@code false}.
+     * </p>
+     *
+     * @param position The {@code Position} to check for player presence.
+     * @param players A {@code List<Player>} containing all the players to check against.
+     * @return {@code true} if a player is at the specified position; {@code false} otherwise.
+     */
+    private boolean isPlayerAtPosition(Position position, List<Player> players) {
         for (Player player : players) {
             if (player.getPosition().equals(position)) {
                 String colorCode = player.getPlayerCarColor().getColor();
@@ -63,10 +95,16 @@ public class UIRaceController implements iUIRaceController {
         return numberFileSelector();
     }
 
-    private int numberFileSelector(){
-        int number = scanner.nextInt();
+    /**
+     * Prompts the user to enter a number between 1 and 3 to select a file.
+     *
+     * @return An {@code int} representing the valid number selected by the user.
+     */
+    private int numberFileSelector() {
+        int number;
+        number = scanner.nextInt();
         scanner.nextLine();
-        while(number < 1 || number > 3) {
+        if (number < 1 || number > 3) {
             iUtils.printlnText("Please enter a valid number between 1 and 3");
             number = scanner.nextInt();
             scanner.nextLine();
@@ -87,11 +125,12 @@ public class UIRaceController implements iUIRaceController {
         return intPlayers;
     }
 
+    @Override
     public void displayPlayerTurn(Player player){
-        String playerSymbolColorCode = player.getPlayerCarColor().getColor();
         iUtils.printlnTextColored("Player's turn", player.getPlayerCarColor().getColor());
     }
 
+    @Override
     public void displayPlayerMove(Player player, Move move){
         iUtils.printlnTextColored("Player's move is" + player.getPlayerAcceleration().toString(), player.getPlayerCarColor().getColor());
     }
