@@ -48,4 +48,9 @@ public class Move implements iMove {
     public Position getNewPosition() {
        return new Position(this.position.getX() + this.acceleration.getAx(), this.position.getY() + this.acceleration.getAy());
     }
+
+    @Override
+    public String toString(){
+        return "[acceleration = (" + this.acceleration.getAx() + ", " + this.acceleration.getAy() + ")]";
+    }
 }

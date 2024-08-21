@@ -23,12 +23,8 @@ public class Position implements iPosition {
      *
      * @param x the x-coordinate of the position
      * @param y the y-coordinate of the position
-     * @throws IllegalArgumentException if either {@code x} or {@code y} is negative
      */
     public Position(int x, int y) {
-        if (x < 0 || y < 0) {
-            throw new IllegalArgumentException("Axes not valid");
-        }
         this.x = x;
         this.y = y;
     }

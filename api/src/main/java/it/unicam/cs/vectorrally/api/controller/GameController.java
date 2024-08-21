@@ -52,6 +52,8 @@ public class GameController implements iGameController {
         this.players = players;
         running = true;
         uiRaceController.displayStart();
+        uiRaceController.displayMessage("STARTING TRACK:");
+        uiRaceController.displayTrack(this.raceTrack, this.players);
     }
 
     @Override
@@ -60,7 +62,10 @@ public class GameController implements iGameController {
         while (running) {
             for (Player player : players) {
                 playerTurn(player);
-                if (someoneWon()) endGame();
+                if (someoneWon()) {
+                    endGame();
+                    return;
+                }
                 Thread.sleep(1000);
             }
         }
@@ -69,7 +74,6 @@ public class GameController implements iGameController {
     @Override
     public void playerTurn(Player player) {
         uiRaceController.displayPlayerTurn(player);
-        uiRaceController.displayTrack(raceTrack, players);
         List<Move> availableMoves = moveCalculator.availableMoves(player, raceTrack, players);
         if (availableMoves.isEmpty()) playerElimination(player);
         if (player instanceof BotPlayer) {
@@ -108,6 +112,7 @@ public class GameController implements iGameController {
         player.setPosition(move.getNewPosition());
         player.setPlayerAcceleration(move.getAcceleration());
         uiRaceController.displayPlayerMove(player, move);
+        uiRaceController.displayTrack(this.raceTrack, this.players);
     }
 
     /**

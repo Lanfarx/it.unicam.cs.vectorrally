@@ -1,5 +1,8 @@
-bot1
-bot2
-bot3
-bot4
-bot5
+bot
+bot
+bot
+bot
+bot
+bot
+bot
+bot

@@ -55,8 +55,7 @@ public class MoveCalculator implements iMoveCalculator {
      * @return {@code true} if the move is valid, {@code false} otherwise.
      */
     private boolean isMoveAvailable(Move move, RaceTrack raceTrack, List<Player> players) {
-        return moveIsInTrack(move, raceTrack) &&
-                playerNotCollidesSymbol(move, raceTrack, TrackSymbol.BORDER) &&
+        return  playerNotCollidesSymbol(move, raceTrack, TrackSymbol.BORDER) &&
                 playerNotCollidesMoving(move, players) &&
                 playerNotCollidesPlayer(move, players);
     }
@@ -87,7 +86,8 @@ public class MoveCalculator implements iMoveCalculator {
         int AyDiff = Math.abs(newPosition.getY() - oldPosition.getY());
         int steps = Math.max(AxDiff, AyDiff);
 
-        for (int i = 0; i <= steps; i++) {
+        if (steps == 0) positions.add(oldPosition);
+        else for (int i = 0; i <= steps; i++) {
             int xStep = oldPosition.getX() + (i * (AxDiff)) / steps;
             int yStep = oldPosition.getY() + (i * (AyDiff)) / steps;
             positions.add(new Position(xStep, yStep));

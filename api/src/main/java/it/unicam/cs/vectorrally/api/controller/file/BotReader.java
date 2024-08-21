@@ -12,6 +12,8 @@ package it.unicam.cs.vectorrally.api.controller.file;
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.Character.isDigit;
+
 /**
  * The {@code BotReader} class implements {@code iBotReader} and provides functionality to read and count bot entries
  * from a specified file. It counts the number of bots defined in the given file by reading the content and counting

@@ -63,9 +63,4 @@ public class Vector implements iVector {
             if (signX == 1) return (signY == 1) ? MoveDirection.UP_RIGHT : MoveDirection.DOWN_RIGHT; // (1 , 1/-1)
             return (signY == 1) ? MoveDirection.UP_LEFT : MoveDirection.DOWN_LEFT; // (-1/1 , 1)
     }
-
-    @Override
-    public String toString(){
-        return "Ax: " + Ax + ", Ay: " + Ay;
-    }
 }

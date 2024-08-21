@@ -109,9 +109,8 @@ public class GameConfigurator implements iGameConfigurator {
      */
     public void addPlayer(List<Player> playersList, Position position, Color playerColor) {
         if (playersList == null || position == null || playerColor == null) {
-            throw new NullPointerException("Players list, position, and color must be non-null.");
+            throw new NullPointerException("Players list, position, and color cannot be null.");
         }
-
         Car car = new Car(playerColor);
         Player p = new BotPlayer(car);
         p.setPosition(position);

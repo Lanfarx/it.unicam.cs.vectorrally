@@ -69,7 +69,7 @@ public class UIRaceController implements iUIRaceController {
      */
     private boolean isPlayerAtPosition(Position position, List<Player> players) {
         for (Player player : players) {
-            if (player.getPosition().equals(position)) {
+            if (player.getPosition().getX() == position.getX() && player.getPosition().getY() == position.getY()) {
                 String colorCode = player.getPlayerCarColor().getColor();
                 iUtils.printTextColored("^", colorCode);
                 return true;
@@ -132,7 +132,7 @@ public class UIRaceController implements iUIRaceController {
 
     @Override
     public void displayPlayerMove(Player player, Move move){
-        iUtils.printlnTextColored("Player's move is" + player.getPlayerAcceleration().toString(), player.getPlayerCarColor().getColor());
+        iUtils.printlnTextColored("Player's move is " + move.toString(), player.getPlayerCarColor().getColor());
     }
 
     @Override
