@@ -9,14 +9,17 @@
 
 package it.unicam.cs.vectorrally.api.controller;
 
-import it.unicam.cs.vectorrally.api.movements.Move;
-import it.unicam.cs.vectorrally.api.movements.Position;
-import it.unicam.cs.vectorrally.api.players.BotPlayer;
-import it.unicam.cs.vectorrally.api.players.Player;
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
-import it.unicam.cs.vectorrally.api.tracks.TrackSymbol;
+import it.unicam.cs.vectorrally.api.model.movements.Move;
+import it.unicam.cs.vectorrally.api.model.movements.MoveCalculator;
+import it.unicam.cs.vectorrally.api.model.movements.Position;
+import it.unicam.cs.vectorrally.api.model.players.BotPlayer;
+import it.unicam.cs.vectorrally.api.model.players.Player;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.view.UIRaceController;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -60,7 +63,7 @@ public class GameController implements iGameController {
     public void run() throws Exception {
         Thread.sleep(1000);
         while (running) {
-            for (Player player : players) {
+            for (Player player : new ArrayList<>(players)) {
                 playerTurn(player);
                 if (someoneWon()) {
                     endGame();
@@ -76,7 +79,7 @@ public class GameController implements iGameController {
         uiRaceController.displayPlayerTurn(player);
         List<Move> availableMoves = moveCalculator.availableMoves(player, raceTrack, players);
         if (availableMoves.isEmpty()) playerElimination(player);
-        if (player instanceof BotPlayer) {
+        else if (player instanceof BotPlayer) {
             BotManager botManager = new BotManager();
             Move move = botManager.nextMove(player, availableMoves);
             moveDeploy(player, move);
@@ -91,6 +94,7 @@ public class GameController implements iGameController {
         this.players.remove(player);
         if (players.isEmpty()) {
             running = false;
+            uiRaceController.displayMessage("EVERYONE HAS BEEN ELIMINATED");
             uiRaceController.displayEnd();
         }
     }

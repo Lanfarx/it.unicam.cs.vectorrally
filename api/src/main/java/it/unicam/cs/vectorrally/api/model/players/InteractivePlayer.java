@@ -7,39 +7,23 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.cars;
+package it.unicam.cs.vectorrally.api.model.players;
+
+import it.unicam.cs.vectorrally.api.model.cars.Car;
 
 /**
- * The {@code Color} enum represents a set of predefined colors, each associated with a specific ANSI escape code
- * for terminal text color formatting. This enum allows for easy use of standard and extended colors in terminal output.
+ * The {@code InteractivePlayer} class represents a player controlled by a human in the racing game.
+ * It extends the {@code Player} class and is initialized with a specific car.
  */
-public enum Color {
-    RED("\033[31m"),
-    BLUE("\033[34m"),
-    GREEN("\033[32m"),
-    YELLOW("\033[33m"),
-    ORANGE("\033[38;5;208m"),
-    MAGENTA("\033[35m"),
-    PINK("\033[38;5;205m"),
-    BROWN("\033[38;5;94m");
-
-    private final String color;
+public class InteractivePlayer extends Player {
 
     /**
-     * Constructs a {@code Color} enum constant with the specified ANSI escape code.
+     * Creates an {@code InteractivePlayer} with the given car.
      *
-     * @param colorCode the ANSI escape code for the color
+     * @param playerCar The {@code Car} that the interactive player will use. This cannot be {@code null}.
+     * @throws NullPointerException If {@code playerCar} is {@code null}.
      */
-    Color(String colorCode) {
-        this.color = colorCode;
-    }
-
-    /**
-     * Gets the ANSI escape code associated with this color.
-     *
-     * @return a {@code String} representing the ANSI escape code for the color
-     */
-    public String getColor() {
-        return color;
+    public InteractivePlayer(Car playerCar) {
+        super(playerCar);
     }
 }

@@ -7,16 +7,13 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.controller;
+package it.unicam.cs.vectorrally.api.model.movements;
 
-import it.unicam.cs.vectorrally.api.movements.Move;
-import it.unicam.cs.vectorrally.api.movements.Position;
-import it.unicam.cs.vectorrally.api.movements.Vector;
-import it.unicam.cs.vectorrally.api.players.Player;
+import it.unicam.cs.vectorrally.api.model.players.Player;
 
 
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
-import it.unicam.cs.vectorrally.api.tracks.TrackSymbol;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +34,7 @@ public class MoveCalculator implements iMoveCalculator {
     private List<Vector> availableVectors(Vector acceleration) {
         List<Vector> vectors = new ArrayList<>();
         int[] Ax = {0, 0, 0, -1, -1, -1, 1, 1, 1};
-        int[] Ay = {0, -1, 1, -1, 0, 1, -1, 0, 1};
+        int[] Ay = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
 
         for (int i = 0; i < 9; i++) {
             vectors.add(new Vector(acceleration.getAx() + Ax[i], acceleration.getAy() + Ay[i]));
@@ -55,8 +52,10 @@ public class MoveCalculator implements iMoveCalculator {
      * @return {@code true} if the move is valid, {@code false} otherwise.
      */
     private boolean isMoveAvailable(Move move, RaceTrack raceTrack, List<Player> players) {
-        return  playerNotCollidesSymbol(move, raceTrack, TrackSymbol.BORDER) &&
-                playerNotCollidesMoving(move, players) &&
+        return  moveIsInTrack(move, raceTrack) &&
+                moveNotInstantFinish(move, raceTrack) &&
+                playerNotCollidesSymbol(move, raceTrack, TrackSymbol.BORDER) &&
+                playerNotCollidesWhileMoving(move, players) &&
                 playerNotCollidesPlayer(move, players);
     }
 
@@ -102,13 +101,13 @@ public class MoveCalculator implements iMoveCalculator {
      * @param players The list of players to check against.
      * @return {@code true} if the move does not collide with any player, {@code false} otherwise.
      */
-    private boolean playerNotCollidesMoving(Move move, List<Player> players) {
+    private boolean playerNotCollidesWhileMoving(Move move, List<Player> players) {
         List<Position> movingPositions = getMovingPath(move);
 
         for (Position position : movingPositions) {
             for (Player player : players) {
-                if (player.getPosition().equals(move.getStartingPosition()) &&
-                        player.getPosition().equals(position)) {
+                if (player.getPosition().equals(position) &&
+                        !(move.getStartingPosition().equals(player.getPosition()))) {
                     return false;
                 }
             }
@@ -129,7 +128,7 @@ public class MoveCalculator implements iMoveCalculator {
         List<Position> symbolPositions = raceTrack.getSymbolsPosition(symbol);
 
         for (Position position : positions) {
-            if (symbolPositions.contains(position)) {
+            if (symbolPositions.contains(position) || raceTrack.getSymbolAtPosition(move.getNewPosition()) == symbol) {
                 return false;
             }
         }
@@ -149,6 +148,27 @@ public class MoveCalculator implements iMoveCalculator {
             if (player.getPosition().equals(newPosition)) {
                 return false;
             }
+        }
+        return true;
+    }
+
+    /**
+     * Checks whether the given move will result in an immediate finish
+     *
+     * @param move The move to check, including the starting and new positions.
+     * @param raceTrack The race track on which the move is performed, used to retrieve start and end positions.
+     * @return {@code true} if the move does not result in an immediate finish, {@code false} if it does.
+     */
+    private boolean moveNotInstantFinish(Move move, RaceTrack raceTrack) {
+        List<Position> startingPositions = raceTrack.getSymbolsPosition(TrackSymbol.START);
+        List<Position> endingPositions = raceTrack.getSymbolsPosition(TrackSymbol.END);
+        if (startingPositions.contains(move.getStartingPosition())) {
+             if(endingPositions.contains(move.getNewPosition())) return false;
+        }
+
+        List<Position> movingPositions = getMovingPath(move);
+        for (Position position : movingPositions) {
+            if(endingPositions.contains(position)) return false;
         }
         return true;
     }

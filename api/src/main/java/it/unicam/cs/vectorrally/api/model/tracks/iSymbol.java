@@ -7,45 +7,19 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.movements;
+package it.unicam.cs.vectorrally.api.model.tracks;
 
 /**
- * The {@code Position} class implements the {@code iPosition} interface and represents a point in a 2D space
- * with {@code x} and {@code y} coordinates. This class provides methods to access and modify these coordinates.
+ * The {@code iSymbol} interface defines a contract for classes that represent a symbol
+ * in the form of a character. It includes a method to retrieve the character associated
+ * with the symbol.
  */
-public class Position implements iPosition {
-
-    private int x;
-    private int y;
+public interface iSymbol {
 
     /**
-     * Constructs a {@code Position} instance with the specified x and y coordinates.
+     * Retrieves the character that represents the symbol.
      *
-     * @param x the x-coordinate of the position
-     * @param y the y-coordinate of the position
+     * @return A {@code char} representing the symbol.
      */
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public int getX() {
-        return this.x;
-    }
-
-    @Override
-    public int getY() {
-        return this.y;
-    }
-
-    @Override
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y = y;
-    }
+    char getSymbol();
 }

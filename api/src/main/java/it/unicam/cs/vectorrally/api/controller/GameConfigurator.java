@@ -9,19 +9,18 @@
 
 package it.unicam.cs.vectorrally.api.controller;
 
-import it.unicam.cs.vectorrally.api.cars.Car;
-import it.unicam.cs.vectorrally.api.cars.Color;
+import it.unicam.cs.vectorrally.api.model.cars.Car;
+import it.unicam.cs.vectorrally.api.model.cars.Color;
 import it.unicam.cs.vectorrally.api.controller.file.BotFileTracker;
 import it.unicam.cs.vectorrally.api.controller.file.BotReader;
 import it.unicam.cs.vectorrally.api.controller.file.RaceTrackReader;
 import it.unicam.cs.vectorrally.api.controller.file.TrackFileTracker;
-import it.unicam.cs.vectorrally.api.movements.Position;
-import it.unicam.cs.vectorrally.api.players.BotPlayer;
-import it.unicam.cs.vectorrally.api.players.Player;
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
-import it.unicam.cs.vectorrally.api.tracks.TrackSymbol;
+import it.unicam.cs.vectorrally.api.model.movements.Position;
+import it.unicam.cs.vectorrally.api.model.players.BotPlayer;
+import it.unicam.cs.vectorrally.api.model.players.Player;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.view.UIRaceController;
-import it.unicam.cs.vectorrally.api.view.iUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,6 +77,7 @@ public class GameConfigurator implements iGameConfigurator {
         List<Color> colors = Arrays.stream(Color.values()).collect(Collectors.toList());
 
         int botPlayersNumber = botReader.botCounter(botFileTracker.findFile(controller.chooseBots()));
+        if(botPlayersNumber < 1) botPlayersNumber = 1;
         addBots(botPlayersNumber, players, startingPositions, colors);
         return players;
     }

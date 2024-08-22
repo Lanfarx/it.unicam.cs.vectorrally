@@ -7,34 +7,39 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.movements;
+package it.unicam.cs.vectorrally.api.model.cars;
 
 /**
- * The {@code iMove} interface defines a contract for classes that represent a move
- * in a racing game. A move consists of an acceleration vector, a starting position,
- * and a new position after the move has been executed.
+ * The {@code Color} enum represents a set of predefined colors, each associated with a specific ANSI escape code
+ * for terminal text color formatting. This enum allows for easy use of standard and extended colors in terminal output.
  */
-public interface iMove {
+public enum Color {
+    RED("\033[31m"),
+    BLUE("\033[34m"),
+    GREEN("\033[32m"),
+    YELLOW("\033[33m"),
+    ORANGE("\033[38;5;208m"),
+    MAGENTA("\033[35m"),
+    PINK("\033[38;5;205m"),
+    BROWN("\033[38;5;94m");
+
+    private final String color;
 
     /**
-     * Retrieves the acceleration vector associated with the move.
+     * Constructs a {@code Color} enum constant with the specified ANSI escape code.
      *
-     * @return A {@code Vector} representing the acceleration for this move.
+     * @param colorCode the ANSI escape code for the color
      */
-    Vector getAcceleration();
+    Color(String colorCode) {
+        this.color = colorCode;
+    }
 
     /**
-     * Retrieves the starting position of the move.
+     * Gets the ANSI escape code associated with this color.
      *
-     * @return A {@code Position} representing the starting position before the move is made.
+     * @return a {@code String} representing the ANSI escape code for the color
      */
-    Position getStartingPosition();
-
-    /**
-     * Retrieves the new position after the move has been executed,
-     * based on the starting position and the acceleration vector.
-     *
-     * @return A {@code Position} representing the new position after the move.
-     */
-    Position getNewPosition();
+    public String getColor() {
+        return color;
+    }
 }

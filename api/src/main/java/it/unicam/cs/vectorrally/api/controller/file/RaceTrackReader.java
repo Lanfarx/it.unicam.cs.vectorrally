@@ -9,9 +9,9 @@
 
 package it.unicam.cs.vectorrally.api.controller.file;
 
-import it.unicam.cs.vectorrally.api.movements.Position;
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
-import it.unicam.cs.vectorrally.api.tracks.TrackSymbol;
+import it.unicam.cs.vectorrally.api.model.movements.Position;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 
 import java.io.IOException;
 import java.util.List;

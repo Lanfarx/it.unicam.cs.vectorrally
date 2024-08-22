@@ -7,11 +7,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.players;
+package it.unicam.cs.vectorrally.api.model.players;
 
-import it.unicam.cs.vectorrally.api.cars.Color;
-import it.unicam.cs.vectorrally.api.movements.Position;
-import it.unicam.cs.vectorrally.api.movements.Vector;
+import it.unicam.cs.vectorrally.api.model.cars.Color;
+import it.unicam.cs.vectorrally.api.model.movements.Position;
+import it.unicam.cs.vectorrally.api.model.movements.Vector;
 
 /**
  * The {@code iPlayer} interface defines a contract for classes that represent a player in a racing game.

@@ -9,10 +9,10 @@
 
 package it.unicam.cs.vectorrally.api.view;
 
-import it.unicam.cs.vectorrally.api.cars.Color;
-import it.unicam.cs.vectorrally.api.movements.Move;
-import it.unicam.cs.vectorrally.api.players.Player;
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.cars.Color;
+import it.unicam.cs.vectorrally.api.model.movements.Move;
+import it.unicam.cs.vectorrally.api.model.players.Player;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 
 import java.util.List;
 

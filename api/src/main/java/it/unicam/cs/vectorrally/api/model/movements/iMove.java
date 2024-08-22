@@ -7,19 +7,34 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.tracks;
+package it.unicam.cs.vectorrally.api.model.movements;
 
 /**
- * The {@code iSymbol} interface defines a contract for classes that represent a symbol
- * in the form of a character. It includes a method to retrieve the character associated
- * with the symbol.
+ * The {@code iMove} interface defines a contract for classes that represent a move
+ * in a racing game. A move consists of an acceleration vector, a starting position,
+ * and a new position after the move has been executed.
  */
-public interface iSymbol {
+public interface iMove {
 
     /**
-     * Retrieves the character that represents the symbol.
+     * Retrieves the acceleration vector associated with the move.
      *
-     * @return A {@code char} representing the symbol.
+     * @return A {@code Vector} representing the acceleration for this move.
      */
-    char getSymbol();
+    Vector getAcceleration();
+
+    /**
+     * Retrieves the starting position of the move.
+     *
+     * @return A {@code Position} representing the starting position before the move is made.
+     */
+    Position getStartingPosition();
+
+    /**
+     * Retrieves the new position after the move has been executed,
+     * based on the starting position and the acceleration vector.
+     *
+     * @return A {@code Position} representing the new position after the move.
+     */
+    Position getNewPosition();
 }

@@ -9,7 +9,7 @@
 
 package it.unicam.cs.vectorrally.api.controller.file;
 
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 
 import java.io.IOException;
 

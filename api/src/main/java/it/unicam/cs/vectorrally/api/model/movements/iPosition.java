@@ -7,20 +7,40 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.movements;
+package it.unicam.cs.vectorrally.api.model.movements;
 
 /**
- * The {@code MoveDirection} enum represents the possible directions in which a move can be made.
- * It includes standard cardinal directions, diagonal directions, and a "NONE" direction for no movement.
+ * The {@code iPosition} interface defines a contract for classes that represent
+ * a position in a 2D space with x and y coordinates. It includes methods to get
+ * and set the x and y coordinates.
  */
-public enum MoveDirection {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    UP_RIGHT,
-    UP_LEFT,
-    DOWN_RIGHT,
-    DOWN_LEFT,
-    NONE;
+public interface iPosition {
+
+    /**
+     * Retrieves the x coordinate of the position.
+     *
+     * @return An {@code int} representing the x coordinate.
+     */
+    int getX();
+
+    /**
+     * Retrieves the y coordinate of the position.
+     *
+     * @return An {@code int} representing the y coordinate.
+     */
+    int getY();
+
+    /**
+     * Sets the x coordinate of the position.
+     *
+     * @param x An {@code int} representing the new x coordinate.
+     */
+    void setX(int x);
+
+    /**
+     * Sets the y coordinate of the position.
+     *
+     * @param y An {@code int} representing the new y coordinate.
+     */
+    void setY(int y);
 }

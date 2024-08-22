@@ -7,23 +7,20 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.players;
-
-import it.unicam.cs.vectorrally.api.cars.Car;
+package it.unicam.cs.vectorrally.api.model.movements;
 
 /**
- * The {@code InteractivePlayer} class represents a player controlled by a human in the racing game.
- * It extends the {@code Player} class and is initialized with a specific car.
+ * The {@code MoveDirection} enum represents the possible directions in which a move can be made.
+ * It includes standard cardinal directions, diagonal directions, and a "NONE" direction for no movement.
  */
-public class InteractivePlayer extends Player {
-
-    /**
-     * Creates an {@code InteractivePlayer} with the given car.
-     *
-     * @param playerCar The {@code Car} that the interactive player will use. This cannot be {@code null}.
-     * @throws NullPointerException If {@code playerCar} is {@code null}.
-     */
-    public InteractivePlayer(Car playerCar) {
-        super(playerCar);
-    }
+public enum MoveDirection {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    UP_RIGHT,
+    UP_LEFT,
+    DOWN_RIGHT,
+    DOWN_LEFT,
+    NONE;
 }

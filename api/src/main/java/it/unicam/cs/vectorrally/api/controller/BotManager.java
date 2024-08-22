@@ -9,8 +9,8 @@
 
 package it.unicam.cs.vectorrally.api.controller;
 
-import it.unicam.cs.vectorrally.api.movements.Move;
-import it.unicam.cs.vectorrally.api.players.Player;
+import it.unicam.cs.vectorrally.api.model.movements.Move;
+import it.unicam.cs.vectorrally.api.model.players.Player;
 
 import java.util.List;
 import java.util.Random;

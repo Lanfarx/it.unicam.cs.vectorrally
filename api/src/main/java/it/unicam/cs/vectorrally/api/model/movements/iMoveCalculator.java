@@ -7,11 +7,10 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.controller;
+package it.unicam.cs.vectorrally.api.model.movements;
 
-import it.unicam.cs.vectorrally.api.movements.Move;
-import it.unicam.cs.vectorrally.api.players.Player;
-import it.unicam.cs.vectorrally.api.tracks.RaceTrack;
+import it.unicam.cs.vectorrally.api.model.players.Player;
+import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 
 import java.util.List;
 
