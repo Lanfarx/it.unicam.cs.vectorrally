@@ -51,6 +51,6 @@ public class Move implements iMove {
 
     @Override
     public String toString(){
-        return "[acceleration = (" + this.acceleration.getAx() + ", " + this.acceleration.getAy() + ")]";
+        return "[acceleration = (" + this.acceleration.getAy() + ", " + -this.acceleration.getAx() + ")]";
     }
 }

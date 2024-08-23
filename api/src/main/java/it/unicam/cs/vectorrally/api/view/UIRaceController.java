@@ -15,6 +15,7 @@ import it.unicam.cs.vectorrally.api.model.movements.Position;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.List;
 
@@ -85,29 +86,35 @@ public class UIRaceController implements iUIRaceController {
 
     @Override
     public int chooseTrack() {
-        iUtils.printlnText("Write the number of the corresponding track file from 1 to 3");
+        iUtils.printlnText("Write the number of the corresponding track file");
         return numberFileSelector();
     }
 
     @Override
     public int chooseBots() {
-        iUtils.printlnText("Write the number of the corresponding bot file from 1 to 3");
+        iUtils.printlnText("Write the number of the corresponding bot file");
         return numberFileSelector();
     }
 
     /**
-     * Prompts the user to enter a number between 1 and 3 to select a file.
+     * Prompts the user to enter a valid integer number.
+     * Continues to prompt the user until a valid number is provided.
      *
-     * @return An {@code int} representing the valid number selected by the user.
+     * @return An {@code int} representing the valid number entered by the user.
      */
     private int numberFileSelector() {
-        int number;
-        number = scanner.nextInt();
-        scanner.nextLine();
-        if (number < 1 || number > 3) {
-            iUtils.printlnText("Please enter a valid number between 1 and 3");
-            number = scanner.nextInt();
-            scanner.nextLine();
+        int number = 0;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                number = scanner.nextInt();
+                scanner.nextLine();
+                validInput = true;
+            } catch (InputMismatchException e) {
+                iUtils.printlnText("Please enter a valid number.");
+                scanner.nextLine();
+            }
         }
         return number;
     }

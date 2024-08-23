@@ -19,10 +19,8 @@ public class ResourceDirectoryFinder implements iDirectoryFinder{
     public String getDirectory() {
         String resourceDirectory;
         String actualDirectory = System.getProperty("user.dir");
-        System.out.println("Current directory: " + actualDirectory);  // Debug message
         if (actualDirectory.endsWith("app")) resourceDirectory = "../api/src/main/resources";
         else resourceDirectory = "api/src/main/resources";
-        System.out.println("Resource directory: " + resourceDirectory);  // Debug message
         return resourceDirectory;
     }
 }

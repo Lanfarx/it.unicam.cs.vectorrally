@@ -7,32 +7,31 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.controller.file;
+package it.unicam.cs.vectorrally.api.controller;
 
-import it.unicam.cs.vectorrally.api.view.iUtils;
+import it.unicam.cs.vectorrally.api.model.movements.Move;
 
-import java.io.IOException;
 import java.util.List;
-
-import static java.lang.Character.isDigit;
+import java.util.Random;
 
 /**
- * The {@code BotReader} class implements {@code iBotReader} and provides functionality to read and count bot entries
- * from a specified file. It counts the number of bots defined in the given file by reading the content and counting
- * relevant entries.
+ * This class provides a basic implementation of the {@link iBotManager} interface,
+ * which is responsible for managing bot players in the game.
+ * The {@code BasicBotManager} randomly determines the next move for a bot from a list of available moves.
  */
-public class BotReader implements iBotReader {
+public class BasicBotManager implements iBotManager{
+    private final Random rand;
+
+    /**
+     * Constructs a {@code BasicBotManager} with a new random value generator.
+     */
+    public BasicBotManager() {
+        this.rand = new Random();
+    }
 
     @Override
-    public int botCounter(String botName) throws IOException {
-        List<String> botLines = iFileReader.readFile(botName);
-        int counter = 0;
-        for(String line : botLines){
-            if (line.equals("bot")) counter++;
-        }
-        if(counter < 1) {
-            iUtils.printlnText("Bots number must be greater than 0, inserted " + ++counter);
-        }
-        return counter;
+    public Move nextMove(List<Move> availableMoves) {
+        int randomMoveIndex = rand.nextInt(availableMoves.size());
+        return availableMoves.get(randomMoveIndex);
     }
 }

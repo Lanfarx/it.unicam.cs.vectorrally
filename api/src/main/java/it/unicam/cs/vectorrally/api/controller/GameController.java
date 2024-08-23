@@ -19,7 +19,6 @@ import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.view.UIRaceController;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -80,8 +79,8 @@ public class GameController implements iGameController {
         List<Move> availableMoves = moveCalculator.availableMoves(player, raceTrack, players);
         if (availableMoves.isEmpty()) playerElimination(player);
         else if (player instanceof BotPlayer) {
-            BotManager botManager = new BotManager();
-            Move move = botManager.nextMove(player, availableMoves);
+            BasicBotManager botManager = new BasicBotManager();
+            Move move = botManager.nextMove(availableMoves);
             moveDeploy(player, move);
         } else {
             //TODO INTERACTIVE PLAYER

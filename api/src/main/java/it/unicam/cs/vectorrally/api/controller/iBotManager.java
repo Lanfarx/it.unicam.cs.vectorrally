@@ -13,24 +13,18 @@ import it.unicam.cs.vectorrally.api.model.movements.Move;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 
 import java.util.List;
-import java.util.Random;
 
 /**
- * The {@code BotManager} class provides functionality to manage bot behaviors in a racing game.
- * It is responsible for determining the next move for a bot player from a list of available moves.
+ * This interface defines the contract for managing bot players in a game.
+ * It provides a method to determine the next move for a bot based on the available moves.
  */
-public class BotManager {
+public interface iBotManager {
 
     /**
-     * Determines the next move for a given bot player by randomly selecting one of the available moves.
+     * Determines the next move for a bot player from a list of possible moves.
      *
-     * @param bot the {@code Player} instance representing the bot for which the move is to be determined
-     * @param availableMoves a {@code List<Move>} containing all possible moves that the bot can choose from
-     * @return the {@code Move} instance that represents the bot's next move, randomly selected from the available moves
+     * @param moves A list of available moves that the bot can choose from.
+     * @return The selected {@link Move} that the bot should make from the provided list of moves.
      */
-    public Move nextMove(Player bot, List<Move> availableMoves) {
-        Random rand = new Random();
-        int randomMoveIndex = rand.nextInt(availableMoves.size());
-        return availableMoves.get(randomMoveIndex);
-    }
+    Move nextMove(List<Move> moves);
 }

@@ -81,12 +81,12 @@ public class MoveCalculator implements iMoveCalculator {
         List<Position> positions = new ArrayList<>();
         Position oldPosition = move.getStartingPosition();
         Position newPosition = move.getNewPosition();
-        int AxDiff = Math.abs(newPosition.getX() - oldPosition.getX());
-        int AyDiff = Math.abs(newPosition.getY() - oldPosition.getY());
-        int steps = Math.max(AxDiff, AyDiff);
+        int AxDiff = newPosition.getX() - oldPosition.getX();
+        int AyDiff = newPosition.getY() - oldPosition.getY();
+        int steps = Math.max(Math.abs(AxDiff), Math.abs(AyDiff));
 
-        if (steps == 0) positions.add(oldPosition);
-        else for (int i = 0; i <= steps; i++) {
+        if(steps == 0) positions.add(move.getStartingPosition());
+        else for (int i = 1; i <= steps; i++) {
             int xStep = oldPosition.getX() + (i * (AxDiff)) / steps;
             int yStep = oldPosition.getY() + (i * (AyDiff)) / steps;
             positions.add(new Position(xStep, yStep));
@@ -163,12 +163,7 @@ public class MoveCalculator implements iMoveCalculator {
         List<Position> startingPositions = raceTrack.getSymbolsPosition(TrackSymbol.START);
         List<Position> endingPositions = raceTrack.getSymbolsPosition(TrackSymbol.END);
         if (startingPositions.contains(move.getStartingPosition())) {
-             if(endingPositions.contains(move.getNewPosition())) return false;
-        }
-
-        List<Position> movingPositions = getMovingPath(move);
-        for (Position position : movingPositions) {
-            if(endingPositions.contains(position)) return false;
+            return !endingPositions.contains(move.getNewPosition());
         }
         return true;
     }

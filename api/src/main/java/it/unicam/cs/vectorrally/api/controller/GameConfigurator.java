@@ -9,18 +9,16 @@
 
 package it.unicam.cs.vectorrally.api.controller;
 
+import it.unicam.cs.vectorrally.api.controller.file.*;
 import it.unicam.cs.vectorrally.api.model.cars.Car;
 import it.unicam.cs.vectorrally.api.model.cars.Color;
-import it.unicam.cs.vectorrally.api.controller.file.BotFileTracker;
-import it.unicam.cs.vectorrally.api.controller.file.BotReader;
-import it.unicam.cs.vectorrally.api.controller.file.RaceTrackReader;
-import it.unicam.cs.vectorrally.api.controller.file.TrackFileTracker;
 import it.unicam.cs.vectorrally.api.model.movements.Position;
 import it.unicam.cs.vectorrally.api.model.players.BotPlayer;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.view.UIRaceController;
+import it.unicam.cs.vectorrally.api.view.iUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,7 +49,7 @@ public class GameConfigurator implements iGameConfigurator {
      */
     public GameConfigurator(UIRaceController controller, RaceTrackReader rtr, BotReader br, TrackFileTracker trackFileTracker, BotFileTracker botFileTracker) {
         if (controller == null || rtr == null || br == null || trackFileTracker == null || botFileTracker == null) {
-            throw new NullPointerException("All parameters must be non-null.");
+            throw new NullPointerException("All parameters can't be null.");
         }
         this.controller = controller;
         this.raceTrackReader = rtr;
@@ -62,7 +60,21 @@ public class GameConfigurator implements iGameConfigurator {
 
     @Override
     public RaceTrack configTrack() throws IOException {
-        String trackPath = trackFileTracker.findFile(controller.chooseTrack());
+        String trackPath = null;
+        List<String> trackContent;
+
+        while (trackPath == null) {
+            trackPath = trackFileTracker.findFile(controller.chooseTrack());
+            if (trackPath != null) {
+                trackContent = iFileReader.readFile(trackPath);
+                if (trackContent.isEmpty()) {
+                    iUtils.printlnText("The selected file is empty, cannot create a track with this. Please choose another file.");
+                    trackPath = null;
+                }
+            } else {
+                iUtils.printlnText("File not found. Please choose another number.");
+            }
+        }
         return raceTrackReader.createTrack(trackPath);
     }
 
@@ -71,13 +83,15 @@ public class GameConfigurator implements iGameConfigurator {
         if (raceTrack == null) {
             throw new NullPointerException("RaceTrack cannot be null.");
         }
-
         List<Player> players = new ArrayList<>();
         List<Position> startingPositions = raceTrack.getSymbolsPosition(TrackSymbol.START);
         List<Color> colors = Arrays.stream(Color.values()).collect(Collectors.toList());
-
-        int botPlayersNumber = botReader.botCounter(botFileTracker.findFile(controller.chooseBots()));
-        if(botPlayersNumber < 1) botPlayersNumber = 1;
+        String botNumberPath = null;
+        while (botNumberPath == null) {
+            botNumberPath = botFileTracker.findFile(controller.chooseBots());
+            if (botNumberPath == null) iUtils.printlnText("Please choose another number (Index of files starts from 1)");
+        }
+        int botPlayersNumber = botReader.botCounter(botNumberPath);
         addBots(botPlayersNumber, players, startingPositions, colors);
         return players;
     }

@@ -43,14 +43,12 @@ public abstract class AbstractFileTracker implements iFileTracker {
 
     @Override
     public String findFile(int number) {
-        // Debug message per il controllo del metodo findFile
-        System.out.println("findFile method called with number: " + number);
         String filename = getFilePrefix() + number + ".txt";
         String filePath = resourceDirectoryFinder.getDirectory() + File.separator + filename;
         File file = new File(filePath);
-        System.out.println("Trying to find file: " + filePath); // Debug message
+        iUtils.printlnText("Trying to find file: " + filePath); // Debug message
         if (file.exists()) {
-            System.out.println("File found: " + file.getPath()); // Debug message
+            iUtils.printlnText("File found: " + file.getPath()); // Debug message
             return file.getPath();
         } else {
             iUtils.printlnText("File not found: " + filename);
