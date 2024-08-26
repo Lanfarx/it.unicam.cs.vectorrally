@@ -7,23 +7,17 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.controller;
+package model.players;
 
-import it.unicam.cs.vectorrally.api.model.movements.Move;
+import it.unicam.cs.vectorrally.api.model.players.BotPlayer;
+import it.unicam.cs.vectorrally.api.model.players.InteractivePlayer;
+import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * This interface defines the contract for managing bot players in a game.
- * It provides a method to determine the next move for a bot based on the available moves.
- */
-public interface iBotManager {
-
-    /**
-     * Determines the next move for a bot player from a list of possible moves.
-     *
-     * @param moves A list of available moves that the bot can choose from.
-     * @return The selected {@link Move} that the bot should make from the provided list of moves.
-     */
-    Move nextMove(List<Move> moves);
+class BotPlayerTest {
+    @Test
+    void testConstructorWithNullCarThrowsException() {
+        assertThrows(NullPointerException.class, () -> new BotPlayer(null){}, "PlayerCar can't be null");
+    }
 }

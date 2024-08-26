@@ -9,11 +9,11 @@
 
 package it.unicam.cs.vectorrally.api.model.movements;
 
+import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 
 
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
-import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 
 import java.util.ArrayList;
 import java.util.List;

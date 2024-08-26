@@ -10,9 +10,9 @@
 package it.unicam.cs.vectorrally.api.model.players;
 
 import it.unicam.cs.vectorrally.api.model.cars.Car;
-import it.unicam.cs.vectorrally.api.model.cars.Color;
 import it.unicam.cs.vectorrally.api.model.movements.Position;
 import it.unicam.cs.vectorrally.api.model.movements.Vector;
+import it.unicam.cs.vectorrally.api.model.cars.Color;
 
 /**
  * The {@code Player} class represents a player in the racing game.

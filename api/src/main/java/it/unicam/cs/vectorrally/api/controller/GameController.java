@@ -30,7 +30,8 @@ public class GameController implements iGameController {
     private RaceTrack raceTrack;
     private List<Player> players;
     private final UIRaceController uiRaceController;
-    private MoveCalculator moveCalculator;
+    private final MoveCalculator moveCalculator;
+
     private boolean running;
 
     /**
@@ -101,9 +102,6 @@ public class GameController implements iGameController {
     /**
      * Updates the position and acceleration of the given player based on the specified move.
      *
-     * This method sets the new position and acceleration for the player according to the provided
-     * move and then displays the move using the user interface controller.
-     *
      * @param player A {@code Player} whose position and acceleration are to be updated.
      * @param move A {@code Move} containing the new position and acceleration to be applied.
      * @throws NullPointerException if the {@code player} or {@code move} is {@code null}.
@@ -121,10 +119,7 @@ public class GameController implements iGameController {
     /**
      * Checks if there is a winner in the game.
      *
-     * This method determines whether any player has met the winning conditions.
-     *
      * @return {@code true} if a player has won the game; {@code false} otherwise.
-     * @throws Exception if an error occurs while checking for a winner.
      */
     private boolean someoneWon(){
         for (Player player : players) {
@@ -144,5 +139,9 @@ public class GameController implements iGameController {
     public void endGame() {
         running = false;
         uiRaceController.displayEnd();
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 }

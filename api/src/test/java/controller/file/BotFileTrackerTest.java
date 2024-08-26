@@ -1,0 +1,50 @@
+/*
+ * Copyright <2024> <Lorenzo Marcantognini>
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+package controller.file;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import it.unicam.cs.vectorrally.api.controller.file.BotFileTracker;
+import it.unicam.cs.vectorrally.api.controller.file.ResourceDirectoryFinder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.io.File;
+
+class BotFileTrackerTest {
+
+    private BotFileTracker botFileTracker;
+    private ResourceDirectoryFinder mockResourceDirectoryFinder;
+
+    @BeforeEach
+    void setUp() {
+        mockResourceDirectoryFinder = mock(ResourceDirectoryFinder.class);
+        botFileTracker = new BotFileTracker(mockResourceDirectoryFinder);
+    }
+
+    @Test
+    void testFindFileWhenFileExists() {
+        String directoryPath = "../api/src/main/resources";
+        String filePath = directoryPath + File.separator + "bot1.txt";
+        when(mockResourceDirectoryFinder.getDirectory()).thenReturn(directoryPath);
+        File file = new File(filePath);
+        File botFile = new File(botFileTracker.findFile(1));
+        assertEquals(file.getAbsolutePath(), botFile.getAbsolutePath());
+    }
+
+    @Test
+    void testFindFileWhenFileDoesNotExist() {
+        String directoryPath = "../api/src/main/resources";
+        when(mockResourceDirectoryFinder.getDirectory()).thenReturn(directoryPath);
+        String result = botFileTracker.findFile(999);
+        assertNull(result);
+    }
+}

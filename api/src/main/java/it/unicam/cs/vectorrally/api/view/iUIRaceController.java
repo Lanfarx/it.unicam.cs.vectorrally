@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * The {@code iUIRaceController} interface extends {@code iUIController} and defines
- * a contract for classes that manage the user interface for a racing game. It includes
+ * a contract for classes that manage the user interface for Vector Rally games. It includes
  * methods for displaying the game track, choosing game settings, and handling player interactions.
  */
 public interface iUIRaceController extends iUIController {

@@ -44,7 +44,6 @@ public class UIRaceController implements iUIRaceController {
 
     @Override
     public void displayTrack(RaceTrack raceTrack, List<Player> players) {
-        System.out.flush();
         for (int i = 0; i < raceTrack.getWidth(); i++) {
             for (int j = 0; j < raceTrack.getLength(); j++) {
                 Position position = new Position(i, j);
@@ -122,19 +121,13 @@ public class UIRaceController implements iUIRaceController {
     @Override
     public int chooseNumPlayers(int maxPlayers) {
         iUtils.printlnText("Choose number of interactive players: ");
-        int intPlayers = scanner.nextInt();
-        scanner.nextLine();
-        while (intPlayers < 0 || intPlayers > maxPlayers) {
-            iUtils.printlnText("Please enter a number between 0 and " + maxPlayers);
-            intPlayers = scanner.nextInt();
-            scanner.nextLine();
-        }
-        return intPlayers;
+        //TODO FOR INTERACTIVE PLAYER
+        return 0;
     }
 
     @Override
     public void displayPlayerTurn(Player player){
-        iUtils.printlnTextColored("Player's turn", player.getPlayerCarColor().getColor());
+        iUtils.printlnTextColored("Player's turn: ^", player.getPlayerCarColor().getColor());
     }
 
     @Override
@@ -155,14 +148,14 @@ public class UIRaceController implements iUIRaceController {
     @Override
     public Move chooseNextMove(List<Move> moves) {
         iUtils.printlnText("Choose your next move: ");
-        //TODO
+        //TODO FOR INTERACTIVE PLAYER
         return null;
     }
 
     @Override
     public Color chooseColor(List<Color> colors) {
         iUtils.printlnText("Choose a color for your car: ");
-        //TODO
+        //TODO FOR INTERACTIVE PLAYER
         return null;
     }
 

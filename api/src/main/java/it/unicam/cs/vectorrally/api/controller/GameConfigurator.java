@@ -72,7 +72,7 @@ public class GameConfigurator implements iGameConfigurator {
                     trackPath = null;
                 }
             } else {
-                iUtils.printlnText("File not found. Please choose another number.");
+                iUtils.printlnText("Please choose another number (Index of files starts from 1)");
             }
         }
         return raceTrackReader.createTrack(trackPath);
@@ -104,7 +104,7 @@ public class GameConfigurator implements iGameConfigurator {
      * @param startingPositions A list of available starting positions on the race track.
      * @param colors A list of colors available for the bot cars.
      */
-    public void addBots(int botPlayersNumber, List<Player> playersList, List<Position> startingPositions, List<Color> colors) {
+    private void addBots(int botPlayersNumber, List<Player> playersList, List<Position> startingPositions, List<Color> colors) {
         if (botPlayersNumber > startingPositions.size()) {
             botPlayersNumber = startingPositions.size();
         }
@@ -121,7 +121,7 @@ public class GameConfigurator implements iGameConfigurator {
      * @param position The starting position of the player.
      * @param playerColor The color of the player's car.
      */
-    public void addPlayer(List<Player> playersList, Position position, Color playerColor) {
+    private void addPlayer(List<Player> playersList, Position position, Color playerColor) {
         if (playersList == null || position == null || playerColor == null) {
             throw new NullPointerException("Players list, position, and color cannot be null.");
         }
