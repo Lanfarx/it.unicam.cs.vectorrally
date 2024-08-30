@@ -11,19 +11,16 @@ package it.unicam.cs.vectorrally.api.controller;
 
 /**
  * The {@code iGameEngine} interface defines the contract for game engine implementations
- * in the Vector Rally application. It provides methods to start the game and manage
- * the overall game flow.
+ * in the Vector Rally application. It provides methods to start the game.
  */
 public interface iGameEngine {
 
     /**
      * Starts the Vector Rally application.
-     *
      * This method initializes and starts the game, including setting up game components,
      * configuring the game environment, and managing the game flow.
      *
-     * @throws Exception if an error occurs while starting the game. This may include issues
-     *                    with configuration, file reading, or game logic.
+     * @throws Exception if an error occurs while starting the game.
      */
     void start() throws Exception;
 }

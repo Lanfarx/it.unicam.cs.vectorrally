@@ -16,15 +16,15 @@ import java.util.List;
 
 /**
  * The {@code iMoveCalculator} interface defines a contract for classes that
- * calculate and provide all possible moves a player can make on a race track.
+ * calculate and provide all possible moves a player can make on a racetrack.
  * It includes a method to determine the available moves based on the current state
- * of the player, the race track, and other players.
+ * of the player, the racetrack, and other players.
  */
 public interface iMoveCalculator {
 
     /**
      * Obtains all the possible moves that the given player can choose based on their
-     * current position, the race track, and the positions of all other players.
+     * current position, the racetrack, and the positions of all other players.
      *
      * @param player A {@code Player} object representing the player who is moving.
      * @param raceTrack A {@code RaceTrack} object representing the current track.

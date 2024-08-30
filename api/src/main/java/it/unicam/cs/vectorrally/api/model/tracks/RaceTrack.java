@@ -27,10 +27,6 @@ public class RaceTrack implements iTrack {
 
     /**
      * Constructs a {@code RaceTrack} instance based on the given matrix of {@code TrackSymbol} values.
-     * <p>
-     * The matrix represents the track where each element corresponds to a symbol indicating different track
-     * features such as start, end, borders, or circuit path.
-     * </p>
      *
      * @param raceTrack A 2D array of {@code TrackSymbol} representing the track. This matrix must not be null
      *                  or empty. Each element of the matrix specifies a particular symbol on the track.

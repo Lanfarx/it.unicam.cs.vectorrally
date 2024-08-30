@@ -16,8 +16,7 @@ import it.unicam.cs.vectorrally.api.view.UIRaceController;
 
 /**
  * The {@code GameEngine} class implements the {@code iGameEngine} interface and is responsible
- * for managing the overall game flow, including initializing game components, configuring the
- * game, and handling game logic.
+ * for initializing game components, configuring the game, and handling game logic.
  */
 public class GameEngine implements iGameEngine {
     private final UIRaceController controller;

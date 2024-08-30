@@ -83,8 +83,6 @@ public class GameController implements iGameController {
             BasicBotManager botManager = new BasicBotManager();
             Move move = botManager.nextMove(availableMoves);
             moveDeploy(player, move);
-        } else {
-            //TODO INTERACTIVE PLAYER
         }
     }
 
@@ -139,9 +137,5 @@ public class GameController implements iGameController {
     public void endGame() {
         running = false;
         uiRaceController.displayEnd();
-    }
-
-    public boolean isRunning() {
-        return running;
     }
 }

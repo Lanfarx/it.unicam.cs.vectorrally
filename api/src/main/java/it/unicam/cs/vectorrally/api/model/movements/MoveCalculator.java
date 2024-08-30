@@ -11,8 +11,6 @@ package it.unicam.cs.vectorrally.api.model.movements;
 
 import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.model.players.Player;
-
-
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 
 import java.util.ArrayList;
@@ -47,7 +45,7 @@ public class MoveCalculator implements iMoveCalculator {
      * and collisions with other players.
      *
      * @param move The move to validate.
-     * @param raceTrack The race track where the move is performed.
+     * @param raceTrack The racetrack where the move is performed.
      * @param players The list of players currently in the game.
      * @return {@code true} if the move is valid, {@code false} otherwise.
      */
@@ -60,11 +58,11 @@ public class MoveCalculator implements iMoveCalculator {
     }
 
     /**
-     * Checks if the move is within the boundaries of the track.
+     * Checks if the move is within the borders of the track.
      *
      * @param move The move to validate.
-     * @param raceTrack The race track to check against.
-     * @return {@code true} if the move is within the track boundaries, {@code false} otherwise.
+     * @param raceTrack The racetrack to check against.
+     * @return {@code true} if the move is within the track borders, {@code false} otherwise.
      */
     private boolean moveIsInTrack(Move move, RaceTrack raceTrack) {
         Position newPosition = move.getNewPosition();
@@ -119,7 +117,7 @@ public class MoveCalculator implements iMoveCalculator {
      * Checks if the move collides with any track symbols of the specified type.
      *
      * @param move The move to validate.
-     * @param raceTrack The race track to check against.
+     * @param raceTrack The racetrack to check against.
      * @param symbol The type of track symbol to check for collisions.
      * @return {@code true} if the move does not collide with the specified track symbol, {@code false} otherwise.
      */
@@ -156,7 +154,7 @@ public class MoveCalculator implements iMoveCalculator {
      * Checks whether the given move will result in an immediate finish
      *
      * @param move The move to check, including the starting and new positions.
-     * @param raceTrack The race track on which the move is performed, used to retrieve start and end positions.
+     * @param raceTrack The racetrack on which the move is performed, used to retrieve start and end positions.
      * @return {@code true} if the move does not result in an immediate finish, {@code false} if it does.
      */
     private boolean moveNotInstantFinish(Move move, RaceTrack raceTrack) {

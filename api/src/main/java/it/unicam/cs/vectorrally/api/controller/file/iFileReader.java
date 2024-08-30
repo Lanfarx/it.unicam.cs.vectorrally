@@ -27,7 +27,7 @@ public interface iFileReader {
      *
      * @param file A {@code String} representing the path to the file to be read.
      * @return A {@code List<String>} containing the lines read from the file, where each line is represented as a {@code String}.
-     * @throws IOException If an I/O error occurs while reading the file.
+     * @throws IOException If an I/O error occurs
      */
     static List<String> readFile(String file) throws IOException {
         List<String> stringLines = new ArrayList<>();

@@ -11,7 +11,7 @@ package it.unicam.cs.vectorrally.api.model.cars;
 
 /**
  * The {@code Color} enum represents a set of predefined colors, each associated with a specific ANSI escape code
- * for terminal text color formatting. This enum allows for easy use of standard and extended colors in terminal output.
+ * for terminal text color formatting.
  */
 public enum Color {
     RED("\033[31m"),

@@ -14,7 +14,7 @@ import it.unicam.cs.vectorrally.api.model.movements.Position;
 import java.util.List;
 
 /**
- * The {@code iTrack} interface defines a contract for classes that represent a race track.
+ * The {@code iTrack} interface defines a contract for classes that represent a racetrack.
  * This interface includes methods for obtaining the dimensions of the track, getting the positions
  * of specific symbols on the track, and checking if a position is within track boundaries.
  */

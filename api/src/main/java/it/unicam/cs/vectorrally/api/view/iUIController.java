@@ -12,7 +12,7 @@ package it.unicam.cs.vectorrally.api.view;
 /**
  * The {@code iUIController} interface defines a contract for classes that manage
  * the user interface in a game. It includes methods for displaying messages and
- * handling the start and end of the game.
+ * displaying the start and end of the game.
  */
 public interface iUIController {
 

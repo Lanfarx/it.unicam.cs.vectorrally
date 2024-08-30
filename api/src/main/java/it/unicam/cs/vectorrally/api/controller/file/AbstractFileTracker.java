@@ -46,9 +46,9 @@ public abstract class AbstractFileTracker implements iFileTracker {
         String filename = getFilePrefix() + number + ".txt";
         String filePath = resourceDirectoryFinder.getDirectory() + File.separator + filename;
         File file = new File(filePath);
-        iUtils.printlnText("Trying to find file: " + filePath); // Debug message
+        iUtils.printlnText("Trying to find file: " + filePath);
         if (file.exists()) {
-            iUtils.printlnText("File found: " + file.getPath()); // Debug message
+            iUtils.printlnText("File found: " + file.getPath());
             return file.getPath();
         } else {
             iUtils.printlnText("File not found: " + filename);

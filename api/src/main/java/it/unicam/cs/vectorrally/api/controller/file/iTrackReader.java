@@ -26,7 +26,7 @@ public interface iTrackReader {
      *
      * @param filepath A {@code String} representing the path to the file that contains the data for the {@code RaceTrack}.
      * @return A {@code RaceTrack} object created from the data in the specified file.
-     * @throws IOException If an I/O error occurs while reading the file.
+     * @throws IOException If an I/O error occurs
      */
     RaceTrack createTrack(String filepath) throws IOException;
 }

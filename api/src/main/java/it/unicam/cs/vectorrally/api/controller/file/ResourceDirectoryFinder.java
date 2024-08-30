@@ -11,7 +11,7 @@ package it.unicam.cs.vectorrally.api.controller.file;
 
 /**
  * The {@code ResourceDirectoryFinder} class implements the {@code iDirectoryFinder} interface and provides functionality
- * to locate and return a directory path based on a given criterion, such as a file number or name.
+ * to locate and returns the project resources directory path.
  */
 public class ResourceDirectoryFinder implements iDirectoryFinder{
 

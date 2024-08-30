@@ -26,7 +26,7 @@ public interface iGameConfigurator {
      * Configures and returns the race track for the game.
      *
      * @return a {@code RaceTrack} object representing the configured track for the game
-     * @throws IOException if an I/O error occurs while reading track configuration
+     * @throws IOException if an I/O error occurs
      */
     RaceTrack configTrack() throws IOException;
 
@@ -36,7 +36,7 @@ public interface iGameConfigurator {
      *
      * @param raceTrack the {@code RaceTrack} on which the players will compete
      * @return a {@code List<Player>} containing all the configured players for the game
-     * @throws IOException if an I/O error occurs while reading player configuration
+     * @throws IOException if an I/O error occurs
      */
     List<Player> configPlayers(RaceTrack raceTrack) throws IOException;
 }

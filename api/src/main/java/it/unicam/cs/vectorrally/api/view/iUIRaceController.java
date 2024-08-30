@@ -24,7 +24,7 @@ import java.util.List;
 public interface iUIRaceController extends iUIController {
 
     /**
-     * Displays the current state of the race track along with the players' positions.
+     * Displays the current state of the racetrack along with the players' positions.
      *
      * @param raceTrack A {@code RaceTrack} representing the track to be displayed.
      * @param players A {@code List<Player>} containing all the players in the game.
@@ -32,14 +32,14 @@ public interface iUIRaceController extends iUIController {
     void displayTrack(RaceTrack raceTrack, List<Player> players);
 
     /**
-     * Prompts the user to choose a track file from 3 and returns the selected track file number.
+     * Prompts the user to choose a track file from the directory and returns the selected track file number.
      *
      * @return An {@code int} representing the number of the selected track file.
      */
     int chooseTrack();
 
     /**
-     * Prompts the user to choose a bot file from 3 and returns the selected bot file number.
+     * Prompts the user to choose a bot file from the directory and returns the selected bot file number.
      *
      * @return An {@code int} representing the number of the selected bot file.
      */

@@ -10,7 +10,7 @@
 package it.unicam.cs.vectorrally.api.controller.file;
 
 /**
- * The {@code TrackFileTracker} class extends {@code AbstractFileTracker} and is responsible for tracking track files.
+ * The {@code TrackFileTracker} class extends {@code AbstractFileTracker} and is responsible for tracking racetrack files.
  * It leverages the file tracking capabilities of the base class and specifies the prefix for track files.
  */
 public class TrackFileTracker extends AbstractFileTracker {

@@ -11,7 +11,7 @@ package it.unicam.cs.vectorrally.api.model.movements;
 
 /**
  * The {@code iMove} interface defines a contract for classes that represent a move
- * in a racing game. A move consists of an acceleration vector, a starting position,
+ * in the Vector Rally game. A move consists of an acceleration vector, a starting position,
  * and a new position after the move has been executed.
  */
 public interface iMove {

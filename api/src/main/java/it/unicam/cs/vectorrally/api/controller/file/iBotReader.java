@@ -23,7 +23,7 @@ public interface iBotReader {
      *
      * @param filepath A {@code String} representing the path to the file from which bots are to be counted.
      * @return An {@code int} representing the number of bots found in the file.
-     * @throws IOException If an I/O error occurs while reading the file.
+     * @throws IOException If an I/O error occurs
      */
     int botCounter(String filepath) throws IOException;
 }

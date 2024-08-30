@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * The {@code UIRaceController} class implements the {@code iUIRaceController} interface and provides
- * functionality to interact with the user for a racing game. It handles the display of the game track,
+ * functionality to interact with the user for the Vector Rally game. It handles the display of the game track,
  * player interactions, and game configuration through a command-line interface.
  * <p>
  * This class uses a {@code Scanner} to read user inputs from the standard input stream.

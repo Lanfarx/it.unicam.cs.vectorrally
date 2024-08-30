@@ -14,7 +14,7 @@ import it.unicam.cs.vectorrally.api.model.movements.Vector;
 import it.unicam.cs.vectorrally.api.model.cars.Color;
 
 /**
- * The {@code iPlayer} interface defines a contract for classes that represent a player in a racing game.
+ * The {@code iPlayer} interface defines a contract for classes that represent a player in a Vector Rally game.
  * This interface includes methods for managing the player's acceleration, car color, and position on the track.
  */
 public interface iPlayer {
