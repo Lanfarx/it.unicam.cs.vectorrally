@@ -7,22 +7,27 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.controller.file;
+package it.unicam.cs.vectorrally.app;
+import it.unicam.cs.vectorrally.api.controller.GameEngine;
+import it.unicam.cs.vectorrally.api.view.GUIRaceControllerFX;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-import java.util.List;
+public class JavaFXApp extends Application {
 
-/**
- * The {@code iFileTracker} interface defines a contract for classes that
- * need to locate files based on a numeric suffix in the file name.
- * It includes a method for finding a file that ends with a specified number.
- */
-public interface iFileTracker {
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            GUIRaceControllerFX uiController = new GUIRaceControllerFX(primaryStage);
+            GameEngine gameEngine = new GameEngine(uiController);
+            gameEngine.start();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    /**
-     * Finds and returns the file whose name ends with the specified number.
-     *
-     * @param number An {@code int} representing the number that should be at the end of the file name.
-     * @return A {@code String} representing the path or name of the file that ends with the specified number.
-     */
-    String findFile(int number);
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
+

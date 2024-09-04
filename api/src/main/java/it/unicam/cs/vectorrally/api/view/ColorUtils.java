@@ -7,22 +7,23 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package it.unicam.cs.vectorrally.api.controller.file;
+package it.unicam.cs.vectorrally.api.view;
 
-import java.util.List;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.Color;
 
-/**
- * The {@code iFileTracker} interface defines a contract for classes that
- * need to locate files based on a numeric suffix in the file name.
- * It includes a method for finding a file that ends with a specified number.
- */
-public interface iFileTracker {
+public class ColorUtils {
 
-    /**
-     * Finds and returns the file whose name ends with the specified number.
-     *
-     * @param number An {@code int} representing the number that should be at the end of the file name.
-     * @return A {@code String} representing the path or name of the file that ends with the specified number.
-     */
-    String findFile(int number);
+    public static Paint getPaintFromColor(it.unicam.cs.vectorrally.api.model.cars.Color colorEnum) {
+        return switch (colorEnum) {
+            case RED -> Color.RED;
+            case BLUE -> Color.BLUE;
+            case GREEN -> Color.GREEN;
+            case YELLOW -> Color.YELLOW;
+            case ORANGE -> Color.ORANGE;
+            case MAGENTA -> Color.MAGENTA;
+            case PINK -> Color.PINK;
+            case BROWN -> Color.BROWN;
+        };
+    }
 }

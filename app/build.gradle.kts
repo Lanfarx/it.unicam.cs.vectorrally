@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 repositories {
@@ -25,6 +26,9 @@ dependencies {
     // This dependency is used by the application.
     implementation(libs.guava)
 
+    implementation("org.openjfx:javafx-controls:$javafx.version")
+    implementation("org.openjfx:javafx-fxml:$javafx.version")
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -34,9 +38,14 @@ java {
     }
 }
 
+javafx {
+    version = "20"
+    modules = listOf("javafx.controls", "javafx.fxml")
+}
+
 application {
     // Define the main class for the application.
-    mainClass = "it.unicam.cs.vectorrally.app.App"
+    mainClass.set("it.unicam.cs.vectorrally.app.JavaFXApp")
 }
 
 tasks.named<Test>("test") {

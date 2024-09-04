@@ -9,7 +9,6 @@
 
 package it.unicam.cs.vectorrally.api.view;
 
-import it.unicam.cs.vectorrally.api.model.cars.Color;
 import it.unicam.cs.vectorrally.api.model.movements.Move;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
@@ -44,30 +43,6 @@ public interface iUIRaceController extends iUIController {
      * @return An {@code int} representing the number of the selected bot file.
      */
     int chooseBots();
-
-    /**
-     * Prompts the user to specify the number of interactive players in the game.
-     *
-     * @param numPlayers An {@code int} representing the number of interactive players.
-     * @return An {@code int} representing the number of interactive players chosen.
-     */
-    int chooseNumPlayers(int numPlayers);
-
-    /**
-     * Prompts the user to choose a car color from the provided list of colors.
-     *
-     * @param colors A {@code List<Color>} containing the available car colors.
-     * @return A {@code Color} representing the chosen car color.
-     */
-    Color chooseColor(List<Color> colors);
-
-    /**
-     * Prompts the user to choose their next move from the available moves.
-     *
-     * @param moves A {@code List<Move>} containing the available moves.
-     * @return A {@code Move} representing the chosen next move.
-     */
-    Move chooseNextMove(List<Move> moves);
 
     /**
      * Displays the turn information for the specified player.

@@ -16,7 +16,7 @@ import it.unicam.cs.vectorrally.api.model.players.BotPlayer;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
-import it.unicam.cs.vectorrally.api.view.UIRaceController;
+import it.unicam.cs.vectorrally.api.view.iUIRaceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.List;
 public class GameController implements iGameController {
     private RaceTrack raceTrack;
     private List<Player> players;
-    private final UIRaceController uiRaceController;
+    private final iUIRaceController uiRaceController;
     private final MoveCalculator moveCalculator;
 
     private boolean running;
@@ -40,7 +40,7 @@ public class GameController implements iGameController {
      * @param uiRaceController An {@code UIRaceController} used to interact with the user and display game information.
      * @param moveCalculator A {@code MoveCalculator} used to determine available moves for players.
      */
-    public GameController(UIRaceController uiRaceController, MoveCalculator moveCalculator) {
+    public GameController(iUIRaceController uiRaceController, MoveCalculator moveCalculator) {
         if (uiRaceController == null || moveCalculator == null) {
             throw new NullPointerException("UIRaceController and MoveCalculator cannot be null.");
         }
@@ -61,17 +61,23 @@ public class GameController implements iGameController {
 
     @Override
     public void run() throws Exception {
-        Thread.sleep(1000);
-        while (running) {
-            for (Player player : new ArrayList<>(players)) {
-                playerTurn(player);
-                if (someoneWon()) {
-                    endGame();
-                    return;
+        new Thread(() -> {
+            try{
+            Thread.sleep(1000);
+            while (running) {
+                for (Player player : new ArrayList<>(players)) {
+                    playerTurn(player);
+                    if (someoneWon()) {
+                        endGame();
+                        return;
+                    }
+                    Thread.sleep(1000);
                 }
-                Thread.sleep(1000);
             }
-        }
+                } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
     }
 
     @Override

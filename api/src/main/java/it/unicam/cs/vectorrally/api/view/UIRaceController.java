@@ -119,13 +119,6 @@ public class UIRaceController implements iUIRaceController {
     }
 
     @Override
-    public int chooseNumPlayers(int maxPlayers) {
-        iUtils.printlnText("Choose number of interactive players: ");
-        //TODO FOR INTERACTIVE PLAYER
-        return 0;
-    }
-
-    @Override
     public void displayPlayerTurn(Player player){
         iUtils.printlnTextColored("Player's turn: ^", player.getPlayerCarColor().getColor());
     }
@@ -143,20 +136,6 @@ public class UIRaceController implements iUIRaceController {
     @Override
     public void displayVictory(Player player) {
         iUtils.printlnTextColored("PLAYER HAS WON", player.getPlayerCarColor().getColor());
-    }
-
-    @Override
-    public Move chooseNextMove(List<Move> moves) {
-        iUtils.printlnText("Choose your next move: ");
-        //TODO FOR INTERACTIVE PLAYER
-        return null;
-    }
-
-    @Override
-    public Color chooseColor(List<Color> colors) {
-        iUtils.printlnText("Choose a color for your car: ");
-        //TODO FOR INTERACTIVE PLAYER
-        return null;
     }
 
     @Override

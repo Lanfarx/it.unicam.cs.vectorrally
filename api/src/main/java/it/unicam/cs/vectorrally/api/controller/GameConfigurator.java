@@ -17,7 +17,7 @@ import it.unicam.cs.vectorrally.api.model.players.BotPlayer;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
-import it.unicam.cs.vectorrally.api.view.UIRaceController;
+import it.unicam.cs.vectorrally.api.view.iUIRaceController;
 import it.unicam.cs.vectorrally.api.view.iUtils;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * and trackers to load necessary game data and initialize players with appropriate settings.
  */
 public class GameConfigurator implements iGameConfigurator {
-    private final UIRaceController controller;
+    private final iUIRaceController controller;
     private final RaceTrackReader raceTrackReader;
     private final BotReader botReader;
     private final TrackFileTracker trackFileTracker;
@@ -47,7 +47,7 @@ public class GameConfigurator implements iGameConfigurator {
      * @param trackFileTracker A {@code TrackFileTracker} used to locate track files.
      * @param botFileTracker A {@code BotFileTracker} used to locate bot files.
      */
-    public GameConfigurator(UIRaceController controller, RaceTrackReader rtr, BotReader br, TrackFileTracker trackFileTracker, BotFileTracker botFileTracker) {
+    public GameConfigurator(iUIRaceController controller, RaceTrackReader rtr, BotReader br, TrackFileTracker trackFileTracker, BotFileTracker botFileTracker) {
         if (controller == null || rtr == null || br == null || trackFileTracker == null || botFileTracker == null) {
             throw new NullPointerException("All parameters can't be null.");
         }

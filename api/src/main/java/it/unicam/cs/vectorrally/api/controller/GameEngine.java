@@ -12,14 +12,14 @@ package it.unicam.cs.vectorrally.api.controller;
 import it.unicam.cs.vectorrally.api.controller.file.*;
 import it.unicam.cs.vectorrally.api.model.movements.MoveCalculator;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
-import it.unicam.cs.vectorrally.api.view.UIRaceController;
+import it.unicam.cs.vectorrally.api.view.iUIRaceController;
 
 /**
  * The {@code GameEngine} class implements the {@code iGameEngine} interface and is responsible
  * for initializing game components, configuring the game, and handling game logic.
  */
 public class GameEngine implements iGameEngine {
-    private final UIRaceController controller;
+    private final iUIRaceController controller;
     private final GameConfigurator configurator;
 
     /**
@@ -28,7 +28,7 @@ public class GameEngine implements iGameEngine {
      *
      * @param controller a {@code UIRaceController} used for interacting with the user interface
      */
-    public GameEngine(UIRaceController controller) {
+    public GameEngine(iUIRaceController controller) {
         this.controller = controller;
         RaceTrackReader raceTrackReader = new RaceTrackReader();
         BotReader botReader = new BotReader();
