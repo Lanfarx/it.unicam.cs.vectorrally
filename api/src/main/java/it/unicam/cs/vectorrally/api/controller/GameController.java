@@ -55,7 +55,6 @@ public class GameController implements iGameController {
         this.players = players;
         running = true;
         uiRaceController.displayStart();
-        uiRaceController.displayMessage("STARTING TRACK:");
         uiRaceController.displayTrack(this.raceTrack, this.players);
     }
 
@@ -77,7 +76,7 @@ public class GameController implements iGameController {
                 } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-        });
+        }).start();
     }
 
     @Override

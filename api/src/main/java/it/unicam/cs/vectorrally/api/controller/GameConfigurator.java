@@ -68,7 +68,7 @@ public class GameConfigurator implements iGameConfigurator {
             if (trackPath != null) {
                 trackContent = iFileReader.readFile(trackPath);
                 if (trackContent.isEmpty()) {
-                    iUtils.printlnText("The selected file is empty, cannot create a track with this. Please choose another file.");
+                    controller.displayInvalidTrackFile();
                     trackPath = null;
                 }
             } else {

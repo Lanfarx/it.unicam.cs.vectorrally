@@ -30,6 +30,8 @@ public interface iUIRaceController extends iUIController {
      */
     void displayTrack(RaceTrack raceTrack, List<Player> players);
 
+    void displayInvalidTrackFile();
+
     /**
      * Prompts the user to choose a track file from the directory and returns the selected track file number.
      *

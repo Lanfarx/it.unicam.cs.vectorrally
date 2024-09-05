@@ -9,7 +9,6 @@
 
 package it.unicam.cs.vectorrally.api.view;
 
-import it.unicam.cs.vectorrally.api.controller.file.FileIndexExtractor;
 import it.unicam.cs.vectorrally.api.controller.file.ResourceDirectoryFinder;
 
 import it.unicam.cs.vectorrally.api.model.movements.Move;
@@ -17,32 +16,39 @@ import it.unicam.cs.vectorrally.api.model.movements.Position;
 import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
 
 import java.util.List;
 
+import static it.unicam.cs.vectorrally.api.controller.file.FileIndexExtractor.getFileIndices;
 import static it.unicam.cs.vectorrally.api.view.ColorUtils.getPaintFromColor;
 
 public class GUIRaceControllerFX implements iUIRaceController{
     private final Stage stage;
-    private Group root;
     private Group trackG;
     private Group playersG;
     private boolean loaded;
     private final ResourceDirectoryFinder resourceDirectoryFinder;
+    private final int cellSize;
 
     public GUIRaceControllerFX(Stage stage) {
         this.stage = stage;
+        this.cellSize = 20;
         this.resourceDirectoryFinder = new ResourceDirectoryFinder();
         loaded = false;
         setupStage();
@@ -51,62 +57,71 @@ public class GUIRaceControllerFX implements iUIRaceController{
     private void setupStage(){
         stage.setTitle("Vector Rally");
 
-        root = new Group();
+        BorderPane borderPane = new BorderPane();
         trackG = new Group();
         playersG = new Group();
-        root.setStyle("-fx-padding: 10; -fx-alignment: center;");
-        root.getChildren().add(new Label("Welcome to Vector Rally"));
-        root.getChildren().addAll(trackG, playersG);
-        Scene scene = new Scene(root, 1000, 1000);
+        Group root = new Group();
+        root.getChildren().addAll(trackG,playersG);
+
+        StackPane trackPane = new StackPane(root);
+        borderPane.setCenter(trackPane);
+
+        Scene scene = new Scene(borderPane);
         stage.setScene(scene);
-        stage.show();
     }
 
     private void updateTrack(RaceTrack track) {
         Platform.runLater(() -> {
             trackG.getChildren().clear();
-            int cellSize = 20;
             for (int i = 0; i < track.getWidth(); i++) {
                 for (int j = 0; j < track.getLength(); j++) {
                     Position position = new Position(i, j);
                     char symbol = track.getSymbolAtPosition(position).getSymbol();
-                    Color color;
-                    if (symbol == '|') {
-                        color = Color.DARKGRAY; // Wall or obstacle
-                    } else if (symbol == '_') {
-                       color = Color.BISQUE;
-                    } else if (symbol == '-') {
-                        color = Color.LIGHTCORAL;
-                    } else {
-                        color = Color.LIGHTGRAY;
-                    }
-
-                    // Create a rectangle for the track cell
-                    Rectangle cell = new Rectangle(cellSize, cellSize);
-                    cell.setFill(color);
-                    cell.setX(j * cellSize);
-                    cell.setY(i * cellSize);
-
-                    // Add the rectangle to the track group
-                    trackG.getChildren().add(cell);
+                    Rectangle trackRectangle = getTrackRectangle(symbol, j, i);
+                    trackG.getChildren().add(trackRectangle);
                 }
+            }
+            stage.sizeToScene();
+            stage.show();
+        });
+    }
+
+    private Rectangle getTrackRectangle(char symbol, int j, int i) {
+        Color color = switch (symbol) {
+            case '|' -> Color.DARKGRAY;
+            case '_' -> Color.TOMATO;
+            case '-' -> Color.ANTIQUEWHITE;
+            default -> Color.LIGHTGRAY;
+        };
+        Rectangle trackRectangle = new Rectangle(cellSize, cellSize);
+        trackRectangle.setFill(color);
+        trackRectangle.setX(j * cellSize);
+        trackRectangle.setY(i * cellSize);
+        trackRectangle.setStroke(Color.BLACK);
+        return trackRectangle;
+    }
+
+    private void updatePlayers(List<Player> players) {
+        Platform.runLater(() -> {
+            playersG.getChildren().clear();
+
+            for (Player player : players) {
+                Circle playerCircle = getPlayerCircle(player, cellSize);
+                playersG.getChildren().add(playerCircle);
             }
         });
     }
 
-    private void updatePlayers(List<Player> players){
-        Platform.runLater(() -> {
-            playersG.getChildren().clear();
-            for (Player player : players) {
+    private Circle getPlayerCircle(Player player, int cellSize) {
+        Position position = player.getPosition();
+        Paint playerPaint = getPaintFromColor(player.getPlayerCarColor());
 
-                Circle playerCircle = new Circle();
-                playerCircle.setRadius(10);
-                playerCircle.setFill(getPaintFromColor(player.getPlayerCarColor()));
-                playerCircle.setCenterX(player.getPosition().getY() * 10);
-                playerCircle.setCenterY(player.getPosition().getX() * 10);
-                playersG.getChildren().add(playerCircle);
-            }
-        });
+        Circle playerCircle = new Circle();
+        playerCircle.setRadius(10);
+        playerCircle.setFill(playerPaint);
+        playerCircle.setCenterX((position.getY() + 0.5) * cellSize);
+        playerCircle.setCenterY((position.getX() + 0.5) * cellSize);
+        return playerCircle;
     }
 
     @Override
@@ -120,13 +135,23 @@ public class GUIRaceControllerFX implements iUIRaceController{
         });
     }
 
+    @Override
+    public void displayInvalidTrackFile() {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid Track File");
+            alert.setHeaderText(null);
+            alert.setContentText("The selected file is empty, cannot create a track with this. Please choose another file.");
+            alert.showAndWait();
+        });
+    }
 
     @Override
     public int chooseTrack() {
         Stage trackStage = new Stage();
         trackStage.setTitle("Select Track");
         String directoryPath = resourceDirectoryFinder.getDirectory();
-        List<Integer> trackIndices = FileIndexExtractor.getFileIndices("track", directoryPath);
+        List<Integer> trackIndices = getFileIndices("track", directoryPath);
         ComboBox<Integer> trackComboBox = new ComboBox<>();
         trackComboBox.getItems().addAll(trackIndices);
         trackComboBox.setPromptText("Select a track");
@@ -154,13 +179,12 @@ public class GUIRaceControllerFX implements iUIRaceController{
         return confirmButton;
     }
 
-
     @Override
     public int chooseBots() {
         Stage botStage = new Stage();
         botStage.setTitle("Select Bots");
         String directoryPath = resourceDirectoryFinder.getDirectory();
-        List<Integer> botIndices = FileIndexExtractor.getFileIndices("bot", directoryPath);
+        List<Integer> botIndices = getFileIndices("bot", directoryPath);
         ComboBox<Integer> botComboBox = new ComboBox<>();
         botComboBox.getItems().addAll(botIndices);
         botComboBox.setPromptText("Select a bot configuration file");
@@ -187,26 +211,92 @@ public class GUIRaceControllerFX implements iUIRaceController{
 
     @Override
     public void displayPlayerElimination(Player player) {
+        Platform.runLater(() -> {
+            Alert eliminationAlert = new Alert(Alert.AlertType.INFORMATION);
+            eliminationAlert.setTitle("Player Eliminated");
+            eliminationAlert.setHeaderText(null);
 
+            Text playerMessage = new Text("Player " + player.getPlayerCarColor() + " has been eliminated!");
+            playerMessage.setFill(getPaintFromColor(player.getPlayerCarColor()));
+
+            VBox dialogPaneContent = new VBox();
+            dialogPaneContent.setAlignment(Pos.CENTER);
+            dialogPaneContent.getChildren().add(playerMessage);
+
+            eliminationAlert.getDialogPane().setContent(dialogPaneContent);
+            eliminationAlert.show();
+        });
     }
 
     @Override
     public void displayVictory(Player player) {
+        Platform.runLater(() -> {
+            Stage victoryStage = new Stage();
+            victoryStage.setTitle("Victory");
 
+            Label victoryLabel = new Label("Congratulations " + player.getPlayerCarColor() + ", you have won!");
+            victoryLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+            victoryLabel.setTextFill(getPaintFromColor(player.getPlayerCarColor()));
+
+            VBox vbox = new VBox(20, victoryLabel);
+            vbox.setAlignment(Pos.CENTER);
+            vbox.setPadding(new Insets(20));
+
+            Scene victoryScene = new Scene(vbox, 600, 200);
+            victoryStage.setScene(victoryScene);
+            victoryStage.show();
+        });
     }
 
     @Override
     public void displayMessage(String message) {
-
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Message");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 
     @Override
     public void displayStart() {
-
+        Label welcomeLabel = new Label("Welcome to Vector Rally");
+        welcomeLabel.setFont(Font.font("Arial", FontWeight.BOLD, 36));
+        welcomeLabel.setTextFill(Color.BLACK);
+        VBox vbox = new VBox(welcomeLabel);
+        vbox.setAlignment(Pos.TOP_CENTER);
+        vbox.setPadding(new Insets(20, 0, 0, 0));
+        BorderPane rootPane = (BorderPane) stage.getScene().getRoot();
+        rootPane.setTop(vbox);
     }
 
     @Override
     public void displayEnd() {
+        Platform.runLater(() -> {
+            Label endLabel = new Label("THE GAME HAS ENDED, CONGRATULATIONS TO EVERYONE WHO PLAYED");
+            endLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+            endLabel.setTextFill(Color.BLACK);
+            endLabel.setAlignment(Pos.CENTER);
 
+            VBox vbox = getClosingGameBox(endLabel);
+
+            Scene endScene = new Scene(vbox, 1000, 500);
+            stage.setScene(endScene);
+            stage.show();
+        });
+    }
+
+    private VBox getClosingGameBox(Label endLabel) {
+        Button closeButton = new Button("Close Game");
+        closeButton.setOnAction(e -> {
+            Stage currentStage = (Stage) closeButton.getScene().getWindow();
+            currentStage.close();
+            Platform.exit();
+        });
+        VBox vbox = new VBox(20, endLabel, closeButton);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(20));
+        return vbox;
     }
 }

@@ -9,7 +9,6 @@
 
 package it.unicam.cs.vectorrally.api.view;
 
-import it.unicam.cs.vectorrally.api.model.cars.Color;
 import it.unicam.cs.vectorrally.api.model.movements.Move;
 import it.unicam.cs.vectorrally.api.model.movements.Position;
 import it.unicam.cs.vectorrally.api.model.players.Player;
@@ -53,6 +52,10 @@ public class UIRaceController implements iUIRaceController {
             }
             iUtils.printlnText("");
         }
+    }
+
+    public void displayInvalidTrackFile(){
+        iUtils.printlnText("The selected file is empty, cannot create a track with this. Please choose another file.");
     }
 
     /**
