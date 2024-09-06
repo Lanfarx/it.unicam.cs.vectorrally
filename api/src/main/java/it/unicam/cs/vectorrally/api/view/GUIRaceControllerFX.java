@@ -68,6 +68,7 @@ public class GUIRaceControllerFX implements iUIRaceController{
 
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
+        stage.sizeToScene();
     }
 
     private void updateTrack(RaceTrack track) {
@@ -81,9 +82,8 @@ public class GUIRaceControllerFX implements iUIRaceController{
                     trackG.getChildren().add(trackRectangle);
                 }
             }
-            stage.sizeToScene();
-            stage.show();
         });
+        stage.show();
     }
 
     private Rectangle getTrackRectangle(char symbol, int j, int i) {
@@ -201,12 +201,61 @@ public class GUIRaceControllerFX implements iUIRaceController{
 
     @Override
     public void displayPlayerTurn(Player player) {
+        Platform.runLater(() -> {
+            Label playerTurnLabel = new Label("It's " + player.getPlayerCarColor() + "'s turn!");
+            playerTurnLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+            playerTurnLabel.setTextFill(getPaintFromColor(player.getPlayerCarColor()));
 
+            updateBottomPanel(playerTurnLabel, null);
+        });
     }
 
     @Override
     public void displayPlayerMove(Player player, Move move) {
+        Platform.runLater(() -> {
+            Label playerMoveLabel = new Label("Player " + player.getPlayerCarColor() + " move is " + move.toString());
+            playerMoveLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+            playerMoveLabel.setTextFill(getPaintFromColor(player.getPlayerCarColor()));
 
+            updateBottomPanel(null, playerMoveLabel);
+        });
+    }
+
+    private void updateBottomPanel(Label turnLabel, Label moveLabel) {
+        BorderPane rootPane = (BorderPane) stage.getScene().getRoot();
+        VBox bottomBox = (VBox) rootPane.getBottom();
+        if (bottomBox == null) {
+            bottomBox = new VBox(10);
+            bottomBox.setAlignment(Pos.CENTER);
+            bottomBox.setPadding(new Insets(10));
+        }
+        updateTurnLabel(turnLabel, bottomBox);
+        updateMoveLabel(moveLabel, bottomBox);
+        rootPane.setBottom(bottomBox);
+        stage.sizeToScene();
+    }
+
+    private void updateTurnLabel(Label turnLabel, VBox bottomBox) {
+        if (turnLabel != null) {
+            if (!bottomBox.getChildren().isEmpty()) {
+                bottomBox.getChildren().set(0, turnLabel);
+            } else {
+                bottomBox.getChildren().add(turnLabel);
+            }
+        }
+    }
+
+    private void updateMoveLabel(Label moveLabel, VBox bottomBox) {
+        if (moveLabel != null) {
+            if (bottomBox.getChildren().size() > 1) {
+                bottomBox.getChildren().set(1, moveLabel);
+            } else {
+                if (bottomBox.getChildren().isEmpty()) {
+                    bottomBox.getChildren().add(new Label());
+                }
+                bottomBox.getChildren().add(moveLabel);
+            }
+        }
     }
 
     @Override
@@ -215,7 +264,6 @@ public class GUIRaceControllerFX implements iUIRaceController{
             Alert eliminationAlert = new Alert(Alert.AlertType.INFORMATION);
             eliminationAlert.setTitle("Player Eliminated");
             eliminationAlert.setHeaderText(null);
-
             Text playerMessage = new Text("Player " + player.getPlayerCarColor() + " has been eliminated!");
             playerMessage.setFill(getPaintFromColor(player.getPlayerCarColor()));
 

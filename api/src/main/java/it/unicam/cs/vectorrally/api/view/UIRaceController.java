@@ -9,6 +9,7 @@
 
 package it.unicam.cs.vectorrally.api.view;
 
+import it.unicam.cs.vectorrally.api.controller.file.ResourceDirectoryFinder;
 import it.unicam.cs.vectorrally.api.model.movements.Move;
 import it.unicam.cs.vectorrally.api.model.movements.Position;
 import it.unicam.cs.vectorrally.api.model.players.Player;
@@ -17,6 +18,8 @@ import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.List;
+
+import static it.unicam.cs.vectorrally.api.controller.file.FileIndexExtractor.getFileIndices;
 
 /**
  * The {@code UIRaceController} class implements the {@code iUIRaceController} interface and provides
@@ -28,12 +31,14 @@ import java.util.List;
  */
 public class UIRaceController implements iUIRaceController {
     private final Scanner scanner;
+    private final ResourceDirectoryFinder resourceDirectoryFinder;
 
     /**
      * Constructs a {@code UIRaceController} instance and initializes the {@code Scanner} for user input.
      */
     public UIRaceController() {
         this.scanner = new Scanner(System.in);
+        this.resourceDirectoryFinder = new ResourceDirectoryFinder();
     }
 
     @Override
@@ -88,12 +93,24 @@ public class UIRaceController implements iUIRaceController {
 
     @Override
     public int chooseTrack() {
+        String directoryPath = resourceDirectoryFinder.getDirectory();
+        List<Integer> trackIndices = getFileIndices("track", directoryPath);
+        iUtils.printlnText("Available track indices:");
+        for (Integer index : trackIndices) {
+            iUtils.printlnText("Track: " + index);
+        }
         iUtils.printlnText("Write the number of the corresponding track file");
         return numberFileSelector();
     }
 
     @Override
     public int chooseBots() {
+        String directoryPath = resourceDirectoryFinder.getDirectory();
+        List<Integer> botIndices = getFileIndices("bot", directoryPath);
+        iUtils.printlnText("Available bot file indices:");
+        for (Integer index : botIndices) {
+            iUtils.printlnText("Bot: " + index);
+        }
         iUtils.printlnText("Write the number of the corresponding bot file");
         return numberFileSelector();
     }

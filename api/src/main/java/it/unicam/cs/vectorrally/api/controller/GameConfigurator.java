@@ -72,7 +72,7 @@ public class GameConfigurator implements iGameConfigurator {
                     trackPath = null;
                 }
             } else {
-                iUtils.printlnText("Please choose another number (Index of files starts from 1)");
+                iUtils.printlnText("Please choose another number from the indices");
             }
         }
         return raceTrackReader.createTrack(trackPath);
@@ -89,7 +89,7 @@ public class GameConfigurator implements iGameConfigurator {
         String botNumberPath = null;
         while (botNumberPath == null) {
             botNumberPath = botFileTracker.findFile(controller.chooseBots());
-            if (botNumberPath == null) iUtils.printlnText("Please choose another number (Index of files starts from 1)");
+            if (botNumberPath == null) iUtils.printlnText("Please choose another number from the indices");
         }
         int botPlayersNumber = botReader.botCounter(botNumberPath);
         addBots(botPlayersNumber, players, startingPositions, colors);
