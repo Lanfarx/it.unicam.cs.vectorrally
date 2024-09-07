@@ -16,17 +16,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The {@code FileIndexExtractor} class provides functionality to extract numeric indices from filenames
- * in a specific directory with a given prefix.
+ * The {@code FileIndexExtractor} class provides utility methods to extract numerical indices from file names
+ * in a specified directory. It searches for files that match a given prefix and follow a specific naming pattern
+ * and returns the list of extracted indices.
  */
 public class FileIndexExtractor {
 
     /**
-     * Retrieves a list of numeric indices from files with the specific prefix in the given directory.
+     * Extracts numerical indices from files in the specified directory that match the given prefix and pattern.
+     * The pattern expects files to be named in the format: "prefix<index>.txt", where <index> is a numerical value.
      *
-     * @param filePrefix the prefix used to identify files
-     * @param directoryPath the path to the directory containing the files
-     * @return a {@code List<Integer>} of indices extracted from file names
+     * @param filePrefix    The prefix that file names should start with ("track" or "bot").
+     * @param directoryPath The path to the directory where the files are located.
+     * @return A list of extracted numerical indices from the matching files.
+     * @throws IllegalArgumentException if the provided path is not a valid directory.
      */
     public static List<Integer> getFileIndices(String filePrefix, String directoryPath) {
         File directory = new File(directoryPath);
@@ -35,11 +38,22 @@ public class FileIndexExtractor {
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException("The provided path is not a directory.");
         }
+        return getIndices(filePrefix, directory, indices);
+    }
 
+    /**
+     * Helper method that performs the actual extraction of indices from file names in the directory.
+     * This method uses a regular expression to match file names and extract the numeric index.
+     *
+     * @param filePrefix The prefix that file names should start with.
+     * @param directory  The directory where the files are located.
+     * @param indices    The list to which extracted indices will be added.
+     * @return The list of extracted numerical indices from the matching files.
+     */
+    private static List<Integer> getIndices(String filePrefix, File directory, List<Integer> indices) {
         File[] files = directory.listFiles((dir, name) -> name.startsWith(filePrefix) && name.matches(".*\\d+\\.txt$"));
         if (files != null) {
             Pattern pattern = Pattern.compile(filePrefix + "(\\d+)\\.txt$");
-
             for (File file : files) {
                 String fileName = file.getName();
                 Matcher matcher = pattern.matcher(fileName);
@@ -52,8 +66,6 @@ public class FileIndexExtractor {
                     }
                 }
             }
-        }
-
-        return indices;
+        } return indices;
     }
 }

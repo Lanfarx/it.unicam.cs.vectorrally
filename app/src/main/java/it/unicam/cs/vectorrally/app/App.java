@@ -12,7 +12,21 @@ package it.unicam.cs.vectorrally.app;
 import it.unicam.cs.vectorrally.api.controller.GameEngine;
 import it.unicam.cs.vectorrally.api.view.UIRaceController;
 
+/**
+ * The main entry point for the Vector Rally application.
+ * This class initializes the CLI UI controller and the game engine,
+ * and then starts the game.
+ */
 public class App {
+
+    /**
+     * The main method of the application. This method initializes the user interface
+     * controller, creates the game engine, and starts the game.
+     *
+     * @param args Command-line arguments passed to the application.
+     * @throws RuntimeException If any exception occurs during the initialization
+     *                          or execution of the game.
+     */
     public static void main(String[] args) {
         try {
             UIRaceController uiController = new UIRaceController();

@@ -20,6 +20,7 @@ import it.unicam.cs.vectorrally.api.view.iUIRaceController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * The {@code GameController} class implements {@code iGameController} and manages the
@@ -31,8 +32,7 @@ public class GameController implements iGameController {
     private List<Player> players;
     private final iUIRaceController uiRaceController;
     private final MoveCalculator moveCalculator;
-
-    private boolean running;
+    private final AtomicBoolean running = new AtomicBoolean();
 
     /**
      * Constructs a {@code GameController} with the specified user interface controller and move calculator.
@@ -46,24 +46,24 @@ public class GameController implements iGameController {
         }
         this.uiRaceController = uiRaceController;
         this.moveCalculator = moveCalculator;
-        this.running = false;
+        this.running.set(false);
     }
 
     @Override
     public void startGame(RaceTrack raceTrack, List<Player> players) {
         this.raceTrack = raceTrack;
         this.players = players;
-        running = true;
+        this.running.set(true);
         uiRaceController.displayStart();
         uiRaceController.displayTrack(this.raceTrack, this.players);
     }
 
     @Override
-    public void run() throws Exception {
+    public void run() {
         new Thread(() -> {
             try{
             Thread.sleep(1000);
-            while (running) {
+            while (running.get()) {
                 for (Player player : new ArrayList<>(players)) {
                     playerTurn(player);
                     if (someoneWon()) {
@@ -96,7 +96,7 @@ public class GameController implements iGameController {
         uiRaceController.displayPlayerElimination(player);
         this.players.remove(player);
         if (players.isEmpty()) {
-            running = false;
+            running.set(false);
             uiRaceController.displayMessage("EVERYONE HAS BEEN ELIMINATED");
             uiRaceController.displayEnd();
         }
@@ -129,7 +129,7 @@ public class GameController implements iGameController {
             if (raceTrack.isInTrack(player.getPosition())) {
                 List<Position> endings = raceTrack.getSymbolsPosition(TrackSymbol.END);
                 if (endings.contains(player.getPosition())) {
-                    running = false;
+                    running.set(false);
                     uiRaceController.displayVictory(player);
                     return true;
                 }
@@ -140,7 +140,7 @@ public class GameController implements iGameController {
 
     @Override
     public void endGame() {
-        running = false;
+        running.set(false);
         uiRaceController.displayEnd();
     }
 }

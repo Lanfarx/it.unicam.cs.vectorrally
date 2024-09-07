@@ -9,12 +9,25 @@
 
 package it.unicam.cs.vectorrally.api.view;
 
-import javafx.scene.paint.Paint;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
-public class ColorUtils {
 
-    public static Paint getPaintFromColor(it.unicam.cs.vectorrally.api.model.cars.Color colorEnum) {
+/**
+ * The {@code iColorUtils} interface provides utility methods for working with colors in the Vector Rally application.
+ * Specifically, it contains a method for converting a custom {@link it.unicam.cs.vectorrally.api.model.cars.Color}
+ * enumeration to a JavaFX {@link javafx.scene.paint.Paint} object.
+ */
+public interface iColorUtils {
+
+    /**
+     * Converts a {@link it.unicam.cs.vectorrally.api.model.cars.Color} enumeration value to a corresponding
+     * JavaFX {@link javafx.scene.paint.Paint} object.
+     *
+     * @param colorEnum The {@link it.unicam.cs.vectorrally.api.model.cars.Color} value to convert.
+     * @return The corresponding {@link javafx.scene.paint.Paint} object.
+     */
+    static Paint getPaintFromColor(it.unicam.cs.vectorrally.api.model.cars.Color colorEnum) {
         return switch (colorEnum) {
             case RED -> Color.RED;
             case BLUE -> Color.BLUE;

@@ -9,8 +9,6 @@
 
 package it.unicam.cs.vectorrally.api.controller.file;
 
-import java.util.List;
-
 /**
  * The {@code iFileTracker} interface defines a contract for classes that
  * need to locate files based on a numeric suffix in the file name.

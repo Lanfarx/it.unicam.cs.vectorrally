@@ -36,8 +36,13 @@ import javafx.scene.paint.Color;
 import java.util.List;
 
 import static it.unicam.cs.vectorrally.api.controller.file.FileIndexExtractor.getFileIndices;
-import static it.unicam.cs.vectorrally.api.view.ColorUtils.getPaintFromColor;
+import static it.unicam.cs.vectorrally.api.view.iColorUtils.getPaintFromColor;
 
+/**
+ * This class implements the {@link iUIRaceController} interface using JavaFX for the graphical user interface (GUI).
+ * It provides methods to display the racetrack, display player turns, and display various messages to the user.
+ * The class uses JavaFX components to create the graphical interface and handle user interactions.
+ */
 public class GUIRaceControllerFX implements iUIRaceController{
     private final Stage stage;
     private Group trackG;
@@ -46,6 +51,11 @@ public class GUIRaceControllerFX implements iUIRaceController{
     private final ResourceDirectoryFinder resourceDirectoryFinder;
     private final int cellSize;
 
+    /**
+     * Constructs a {@code GUIRaceControllerFX} with the specified JavaFX {@code Stage}.
+     *
+     * @param stage The primary {@code Stage} for the application.
+     */
     public GUIRaceControllerFX(Stage stage) {
         this.stage = stage;
         this.cellSize = 20;
@@ -54,6 +64,10 @@ public class GUIRaceControllerFX implements iUIRaceController{
         setupStage();
     }
 
+    /**
+     * Sets up the main stage and scene for the application, configuring the layout
+     * for the track and player graphics.
+     */
     private void setupStage(){
         stage.setTitle("Vector Rally");
 
@@ -68,12 +82,15 @@ public class GUIRaceControllerFX implements iUIRaceController{
 
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
-        stage.sizeToScene();
     }
 
+    /**
+     * Updates the graphical representation of the race track.
+     *
+     * @param track The {@code RaceTrack} object representing the current state of the track.
+     */
     private void updateTrack(RaceTrack track) {
         Platform.runLater(() -> {
-            trackG.getChildren().clear();
             for (int i = 0; i < track.getWidth(); i++) {
                 for (int j = 0; j < track.getLength(); j++) {
                     Position position = new Position(i, j);
@@ -83,9 +100,18 @@ public class GUIRaceControllerFX implements iUIRaceController{
                 }
             }
         });
+        stage.sizeToScene();
         stage.show();
     }
 
+    /**
+     * Creates a {@code Rectangle} representing a track cell based on the given symbol and position.
+     *
+     * @param symbol The character representing the track cell type.
+     * @param j      The X-coordinate of the cell.
+     * @param i      The Y-coordinate of the cell.
+     * @return A {@code Rectangle} object representing the track cell.
+     */
     private Rectangle getTrackRectangle(char symbol, int j, int i) {
         Color color = switch (symbol) {
             case '|' -> Color.DARKGRAY;
@@ -101,6 +127,11 @@ public class GUIRaceControllerFX implements iUIRaceController{
         return trackRectangle;
     }
 
+    /**
+     * Updates the graphical representation of the players on the track.
+     *
+     * @param players A {@code List} of {@code Player} objects representing the current state of the players.
+     */
     private void updatePlayers(List<Player> players) {
         Platform.runLater(() -> {
             playersG.getChildren().clear();
@@ -112,6 +143,13 @@ public class GUIRaceControllerFX implements iUIRaceController{
         });
     }
 
+    /**
+     * Creates a {@code Circle} representing a player on the track.
+     *
+     * @param player   The {@code Player} object representing the player.
+     * @param cellSize The size of the cell in which the player is positioned.
+     * @return A {@code Circle} object representing the player on the track.
+     */
     private Circle getPlayerCircle(Player player, int cellSize) {
         Position position = player.getPosition();
         Paint playerPaint = getPaintFromColor(player.getPlayerCarColor());
@@ -166,6 +204,15 @@ public class GUIRaceControllerFX implements iUIRaceController{
         return trackComboBox.getValue();
     }
 
+    /**
+     * Creates a confirmation button for selecting a file.
+     * The button closes the provided {@link Stage} if a file is selected in the {@link ComboBox}.
+     * If no file is selected, a message is displayed to prompt the user to select a file.
+     *
+     * @param fileComboBox The {@link ComboBox} containing the list of file options to choose from.
+     * @param stageFile The {@link Stage} to be closed when a file is selected.
+     * @return A {@link Button} configured to confirm the file selection.
+     */
     private Button getFileConfirmButton(ComboBox<Integer> fileComboBox, Stage stageFile) {
         Button confirmButton = new Button("Confirm");
         confirmButton.setOnAction(e -> {
@@ -221,6 +268,13 @@ public class GUIRaceControllerFX implements iUIRaceController{
         });
     }
 
+    /**
+     * Updates the bottom panel of the GUI to display the current player's turn and move.
+     * This method manages the layout and updating of labels for the turn and move information.
+     *
+     * @param turnLabel The {@link Label} to display the player's turn, or {@code null} if not updating the turn label.
+     * @param moveLabel The {@link Label} to display the player's move, or {@code null} if not updating the move label.
+     */
     private void updateBottomPanel(Label turnLabel, Label moveLabel) {
         BorderPane rootPane = (BorderPane) stage.getScene().getRoot();
         VBox bottomBox = (VBox) rootPane.getBottom();
@@ -235,6 +289,13 @@ public class GUIRaceControllerFX implements iUIRaceController{
         stage.sizeToScene();
     }
 
+    /**
+     * Updates the turn label in the bottom panel.
+     * If {@code turnLabel} is {@code null}, the method does nothing.
+     *
+     * @param turnLabel The {@link Label} to display the player's turn.
+     * @param bottomBox The {@link VBox} that contains the turn label.
+     */
     private void updateTurnLabel(Label turnLabel, VBox bottomBox) {
         if (turnLabel != null) {
             if (!bottomBox.getChildren().isEmpty()) {
@@ -245,6 +306,13 @@ public class GUIRaceControllerFX implements iUIRaceController{
         }
     }
 
+    /**
+     * Updates the move label in the bottom panel.
+     * If {@code moveLabel} is {@code null}, the method does nothing.
+     *
+     * @param moveLabel The {@link Label} to display the player's move.
+     * @param bottomBox The {@link VBox} that contains the move label.
+     */
     private void updateMoveLabel(Label moveLabel, VBox bottomBox) {
         if (moveLabel != null) {
             if (bottomBox.getChildren().size() > 1) {
@@ -335,6 +403,12 @@ public class GUIRaceControllerFX implements iUIRaceController{
         });
     }
 
+    /**
+     * Creates a VBox containing an end-of-game message and a button to close the game.
+     *
+     * @param endLabel The {@link Label} displaying the end-of-game message.
+     * @return A {@link VBox} containing the end-of-game message and the close button.
+     */
     private VBox getClosingGameBox(Label endLabel) {
         Button closeButton = new Button("Close Game");
         closeButton.setOnAction(e -> {

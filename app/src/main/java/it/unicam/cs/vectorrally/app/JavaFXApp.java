@@ -13,12 +13,27 @@ import it.unicam.cs.vectorrally.api.view.GUIRaceControllerFX;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * The main entry point for the JavaFX version of the Vector Rally application.
+ * This class extends the {@link javafx.application.Application} class and
+ * serves as the main class for launching the JavaFX application.
+ */
 public class JavaFXApp extends Application {
 
+    /**
+     * This method is called after the JavaFX runtime has been initialized
+     * and is responsible for setting up the primary stage
+     * and initializing the game components.
+     *
+     * @param stage The primary stage for this application, onto which
+     *                     the application scene can be set.
+     * @throws RuntimeException If any exception occurs during the initialization
+     *                          or execution of the game.
+     */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) {
         try {
-            GUIRaceControllerFX uiController = new GUIRaceControllerFX(primaryStage);
+            GUIRaceControllerFX uiController = new GUIRaceControllerFX(stage);
             GameEngine gameEngine = new GameEngine(uiController);
             gameEngine.start();
         } catch (Exception e) {
@@ -26,6 +41,12 @@ public class JavaFXApp extends Application {
         }
     }
 
+    /**
+     * The main method of the application. This method is used to launch the
+     * JavaFX application.
+     *
+     * @param args Command-line arguments passed to the application.
+     */
     public static void main(String[] args) {
         launch(args);
     }

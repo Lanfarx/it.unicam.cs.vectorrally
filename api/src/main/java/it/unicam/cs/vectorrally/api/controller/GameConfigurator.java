@@ -42,7 +42,7 @@ public class GameConfigurator implements iGameConfigurator {
      * Constructs a {@code GameConfigurator} with the specified controllers, readers, and trackers.
      *
      * @param controller A {@code UIRaceController} used to interact with the user for game configuration.
-     * @param rtr A {@code RaceTrackReader} used to read and create race tracks from files.
+     * @param rtr A {@code RaceTrackReader} used to read and create racetracks from files.
      * @param br A {@code BotReader} used to read bot configurations from files.
      * @param trackFileTracker A {@code TrackFileTracker} used to locate track files.
      * @param botFileTracker A {@code BotFileTracker} used to locate bot files.
