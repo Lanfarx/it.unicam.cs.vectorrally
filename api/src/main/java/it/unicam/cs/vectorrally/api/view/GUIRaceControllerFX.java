@@ -234,7 +234,7 @@ public class GUIRaceControllerFX implements iUIRaceController{
         List<Integer> botIndices = getFileIndices("bot", directoryPath);
         ComboBox<Integer> botComboBox = new ComboBox<>();
         botComboBox.getItems().addAll(botIndices);
-        botComboBox.setPromptText("Select a bot configuration file");
+        botComboBox.setPromptText("Select a bot configuration file (if no bots are found, 1 is added)");
         Button confirmButton = getFileConfirmButton(botComboBox, botStage);
         VBox layout = new VBox(10);
         layout.setAlignment(Pos.CENTER);

@@ -18,7 +18,6 @@ import it.unicam.cs.vectorrally.api.model.players.Player;
 import it.unicam.cs.vectorrally.api.model.tracks.RaceTrack;
 import it.unicam.cs.vectorrally.api.model.tracks.TrackSymbol;
 import it.unicam.cs.vectorrally.api.view.iUIRaceController;
-import it.unicam.cs.vectorrally.api.view.iUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -71,8 +70,6 @@ public class GameConfigurator implements iGameConfigurator {
                     controller.displayInvalidTrackFile();
                     trackPath = null;
                 }
-            } else {
-                iUtils.printlnText("Please choose another number from the indices");
             }
         }
         return raceTrackReader.createTrack(trackPath);
@@ -89,7 +86,6 @@ public class GameConfigurator implements iGameConfigurator {
         String botNumberPath = null;
         while (botNumberPath == null) {
             botNumberPath = botFileTracker.findFile(controller.chooseBots());
-            if (botNumberPath == null) iUtils.printlnText("Please choose another number from the indices");
         }
         int botPlayersNumber = botReader.botCounter(botNumberPath);
         addBots(botPlayersNumber, players, startingPositions, colors);

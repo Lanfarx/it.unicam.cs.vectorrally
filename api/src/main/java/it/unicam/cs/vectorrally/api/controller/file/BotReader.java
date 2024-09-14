@@ -29,7 +29,7 @@ public class BotReader implements iBotReader {
             if (line.equals("bot")) counter++;
         }
         if(counter < 1) {
-            iUtils.printlnText("Bots number must be greater than 0, inserted " + ++counter);
+             ++counter;
         }
         return counter;
     }

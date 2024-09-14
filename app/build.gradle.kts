@@ -28,7 +28,6 @@ dependencies {
 
     implementation("org.openjfx:javafx-controls:$javafx.version")
     implementation("org.openjfx:javafx-fxml:$javafx.version")
-
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -39,7 +38,7 @@ java {
 }
 
 javafx {
-    version = "20"
+    version = "21"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 

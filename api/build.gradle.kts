@@ -19,11 +19,18 @@ dependencies {
     implementation("org.openjfx:javafx-fxml:$javafx.version")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+
 javafx {
-    version = "20"
+    version = "21"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
 }

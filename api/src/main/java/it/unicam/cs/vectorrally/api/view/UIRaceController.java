@@ -100,7 +100,7 @@ public class UIRaceController implements iUIRaceController {
         for (Integer index : trackIndices) {
             iUtils.printlnText("Track: " + index);
         }
-        iUtils.printlnText("Write the number of the corresponding track file");
+        iUtils.printlnText("Write the number of the corresponding available track file");
         return numberFileSelector();
     }
 
@@ -112,7 +112,7 @@ public class UIRaceController implements iUIRaceController {
         for (Integer index : botIndices) {
             iUtils.printlnText("Bot: " + index);
         }
-        iUtils.printlnText("Write the number of the corresponding bot file");
+        iUtils.printlnText("Write the number of the corresponding available bot file (if no bots are found, 1 is added)");
         return numberFileSelector();
     }
 
